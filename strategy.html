@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Strategy — GMI Global Capital Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#0a0d12;--paper:#f5f3ee;--cream:#ede9e0;--gold:#c88638;--goldlt:#e3a65b;--slate:#1e2535;--mid:#6b7280;--rule:rgba(10,13,18,.1);--ruleg:rgba(184,150,96,.3);--fd:'Cormorant Garamond',Georgia,serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+.page-hero{padding:140px 56px 80px;max-width:1300px;margin:0 auto}
+.ph-label{font-family:var(--fm);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.ph-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.ph-title{font-family:var(--fd);font-size:clamp(52px,5.5vw,80px);font-weight:300;line-height:1.04;color:var(--ink);margin-bottom:24px}
+.ph-title em{font-style:italic;color:var(--gold)}
+.ph-sub{font-size:16px;font-weight:300;line-height:1.85;color:var(--mid);max-width:600px}
+.sec{max-width:1300px;margin:0 auto;padding:100px 56px}
+.sec-label{font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.sec-label::before{content:'';display:block;width:22px;height:1px;background:var(--gold)}
+.sec-title{font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:16px}
+.sec-title em{font-style:italic;color:var(--gold)}
+.sec-body{font-size:15px;font-weight:300;line-height:1.85;color:var(--mid);max-width:540px}
+.tag{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--ruleg);padding:4px 11px}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.btn-primary{font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:15px 34px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-primary:hover{background:var(--slate)}
+.btn-gold{font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:15px 34px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-gold:hover{background:var(--goldlt)}
+.btn-ghost{font-size:11.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:color .2s,border-color .2s}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+</style>
+</head>
+<body>
+
+
+
+<!-- PAGE HERO -->
+<div style="background:var(--ink);padding-top:68px;position:relative;overflow:hidden">
+  <canvas id="heroCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+  <div style="position:relative;z-index:1;">
+  <div class="page-hero" style="padding-top:80px;padding-bottom:80px">
+    <div class="ph-label" style="color:var(--goldlt);animation:fadeUp .7s .1s both">Investment Strategy</div>
+    <h1 class="ph-title" style="color:var(--paper);animation:fadeUp .7s .25s both">Disciplined Capital<br/><em>Allocation</em></h1>
+    <p class="ph-sub" style="color:rgba(245,243,238,.55);animation:fadeUp .7s .4s both">Our portfolio construction is anchored in private credit — engineered to deliver capital preservation, durable income, and asymmetric upside for sophisticated investors across the full liquidity spectrum.</p>
+  </div>
+  </div>
+</div>
+
+<!-- ALLOCATION OVERVIEW -->
+<section style="background:var(--slate)">
+  <div style="max-width:1300px;margin:0 auto;padding:72px 56px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-left:1px solid rgba(255,255,255,.07)">
+    <div style="padding:0 44px;border-right:1px solid rgba(255,255,255,.07)" class="reveal">
+      <div style="font-family:var(--fd);font-size:56px;font-weight:300;color:var(--paper);line-height:1;letter-spacing:-.02em">80<span style="color:var(--gold)">%</span></div>
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.38);margin-top:10px">Private Credit Allocation</div>
+    </div>
+    <div style="padding:0 44px;border-right:1px solid rgba(255,255,255,.07)" class="reveal">
+      <div style="font-family:var(--fd);font-size:56px;font-weight:300;color:var(--paper);line-height:1;letter-spacing:-.02em">15<span style="color:var(--gold)">%</span></div>
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.38);margin-top:10px">Equities / M&A Credit</div>
+    </div>
+    <div style="padding:0 44px" class="reveal">
+      <div style="font-family:var(--fd);font-size:56px;font-weight:300;color:var(--paper);line-height:1;letter-spacing:-.02em">5<span style="color:var(--gold)">%</span></div>
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.38);margin-top:10px">Real Assets Allocation</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUR MANDATES -->
+<section>
+  <div class="sec">
+    <div class="sec-label reveal">Core Mandates</div>
+    <h2 class="sec-title reveal">Four Pillars of <em>Private Credit</em></h2>
+    <p class="sec-body reveal" style="margin-bottom:64px">Our investment platform is built on four disciplined mandates — each engineered to generate durable, risk-adjusted returns while deploying capital where it is most needed globally.</p>
+
+    <!-- Mandate 01 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px">
+      <div style="background:var(--cream);padding:52px 48px;position:relative;overflow:hidden;transition:background .25s" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='var(--cream)'" class="reveal">
+        <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold)"></div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--ink);margin-bottom:18px;line-height:1.2"><span style="color:var(--gold)">01.</span> M&A Credit Financing</div>
+        <p style="font-size:14px;font-weight:300;line-height:1.85;color:var(--mid);margin-bottom:28px">We provide bespoke acquisition financing and leveraged credit solutions across the full capital structure — senior secured, mezzanine, unitranche, and subordinated debt — supporting corporate sponsors and strategic acquirers in both sponsor-backed and public-to-private transactions globally.</p>
+
+      </div>
+      <div style="background:var(--cream);padding:52px 48px;position:relative;overflow:hidden;transition:background .25s" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='var(--cream)'" class="reveal">
+        <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold)"></div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--ink);margin-bottom:18px;line-height:1.2"><span style="color:var(--gold)">02.</span> Banking & Fintech Credit Facility</div>
+        <p style="font-size:14px;font-weight:300;line-height:1.85;color:var(--mid);margin-bottom:28px">Structured credit facilities tailored for banking institutions, digital lenders, and fintech platforms. We underwrite warehouse lines, revolving credit facilities, and portfolio-level financing — enabling next-generation financial institutions to scale their balance sheets with institutional-grade capital.</p>
+
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <div style="background:var(--cream);padding:52px 48px;position:relative;overflow:hidden;transition:background .25s" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='var(--cream)'" class="reveal">
+        <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold)"></div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--ink);margin-bottom:18px;line-height:1.2"><span style="color:var(--gold)">03.</span> Sovereign Debt Allocation</div>
+        <p style="font-size:14px;font-weight:300;line-height:1.85;color:var(--mid);margin-bottom:28px">Strategic allocation to sovereign and quasi-sovereign debt instruments across emerging and frontier markets. We identify mispriced risk in government bonds, state-backed credit structures, and development-linked instruments — capturing yield premium through a disciplined, research-driven risk framework.</p>
+
+      </div>
+      <div style="background:var(--cream);padding:52px 48px;position:relative;overflow:hidden;transition:background .25s" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='var(--cream)'" class="reveal">
+        <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold)"></div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--ink);margin-bottom:18px;line-height:1.2"><span style="color:var(--gold)">04.</span> Syndications & Co-Lending</div>
+        <p style="font-size:14px;font-weight:300;line-height:1.85;color:var(--mid);margin-bottom:28px">We structure and co-arrange credit syndications, enabling institutional partners to participate in large-ticket private credit transactions. Our syndication desk aggregates demand from qualified investors while managing documentation, servicing, and waterfall structures for complex, multi-creditor facilities.</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY APPROACHES -->
+<section style="background:var(--ink);position:relative;overflow:hidden">
+  <canvas id="approachesCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+  <div class="sec" style="position:relative;z-index:1;">
+    <div class="sec-label reveal" style="color:var(--goldlt)">Investment Approaches</div>
+    <h2 class="sec-title reveal" style="color:var(--paper)">How We <em>Deploy</em> Capital</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px">
+      <div style="border-top:1px solid rgba(255,255,255,.08);padding:36px 0" class="reveal">
+        <div style="font-family:var(--fm);font-size:9.5px;color:var(--gold);letter-spacing:.1em;margin-bottom:14px">01</div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--paper);margin-bottom:10px">Senior Secured Lending</div>
+        <p style="font-size:14px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8">First-lien, asset-backed credit with strong covenant packages and active portfolio monitoring across our global borrower universe. We prioritise security of capital above yield optimisation.</p>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.08);padding:36px 0 36px 52px" class="reveal">
+        <div style="font-family:var(--fm);font-size:9.5px;color:var(--gold);letter-spacing:.1em;margin-bottom:14px">02</div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--paper);margin-bottom:10px">Structured Mezzanine</div>
+        <p style="font-size:14px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8">Junior capital solutions with equity participation rights, warrants, and PIK structures bridging the gap between senior debt and equity — capturing enhanced returns for appropriate risk tolerance.</p>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.08);padding:36px 0" class="reveal">
+        <div style="font-family:var(--fm);font-size:9.5px;color:var(--gold);letter-spacing:.1em;margin-bottom:14px">03</div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--paper);margin-bottom:10px">Opportunistic Credit</div>
+        <p style="font-size:14px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8">Tactical allocation to dislocated credit, distressed debt, and special situations — capturing mispricings across market cycles with asymmetric risk-reward profiles.</p>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.08);padding:36px 0 36px 52px" class="reveal">
+        <div style="font-family:var(--fm);font-size:9.5px;color:var(--gold);letter-spacing:.1em;margin-bottom:14px">04</div>
+        <div style="font-family:var(--fd);font-size:28px;font-weight:500;color:var(--paper);margin-bottom:10px">Emerging Market Credit</div>
+        <p style="font-size:14px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8">Bespoke credit facilities for high-growth emerging and frontier markets — capturing structural yield premium with rigorous country, currency, and credit risk management frameworks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUND VEHICLES -->
+<section>
+  <div class="sec">
+    <div class="sec-label reveal">Fund Vehicles</div>
+    <h2 class="sec-title reveal">Access Through <em>Dedicated</em> Vehicles</h2>
+    <p class="sec-body reveal">GMI offers two primary fund vehicles, each designed to meet distinct investor mandates and geographic preferences.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px">
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--gold);padding:0;transition:box-shadow .25s" class="reveal">
+        <img src="global-vehicle.png" style="width:100%;height:220px;object-fit:cover;display:block" alt="Global Master Fund">
+        <div style="padding:48px 44px;">
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;color:var(--gold);margin-bottom:20px">GLOBAL VEHICLE</div>
+          <div style="font-family:var(--fd);font-size:34px;font-weight:300;color:var(--ink);margin-bottom:8px">GMI Master Fund</div>
+          <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:28px">A global diversified private credit vehicle deploying across all four core mandates — M&A credit, banking & fintech, sovereign debt, and syndications — in both emerging and mature markets. Designed for institutional investors seeking broad private credit exposure with active portfolio management.</p>
+
+          <a class="btn-ghost" href="investor-access.html">Request Access →</a>
+        </div>
+      </div>
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--gold);padding:0;transition:box-shadow .25s" class="reveal">
+        <img src="africa-vehicle.png" style="width:100%;height:220px;object-fit:cover;display:block" alt="Africa Fund">
+        <div style="padding:48px 44px;">
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;color:var(--gold);margin-bottom:20px">AFRICA-FOCUSED VEHICLE</div>
+          <div style="font-family:var(--fd);font-size:34px;font-weight:300;color:var(--ink);margin-bottom:8px">GMI Fund Africa</div>
+          <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:28px">A dedicated Pan-African private credit vehicle providing concentrated exposure to African sovereign, quasi-sovereign, banking sector, and corporate credit opportunities. Capitalises on Africa's structural capital gap and yield premium relative to comparable global credit markets.</p>
+
+          <a class="btn-ghost" href="investor-access.html">Request Access →</a>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--mid);font-style:italic;margin-top:20px;font-weight:300">Allocation targets are indicative and subject to change based on market conditions and fund mandate constraints.</p>
+  </div>
+</section>
+
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){setTimeout(()=>x.target.classList.add('visible'),60);obs.unobserve(x.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+<script>
+// Moving Animated Design for Hero Section
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+let width, height, time = 0;
+
+function resize() {
+  if (!canvas.parentElement) return;
+  width = canvas.width = canvas.parentElement.offsetWidth;
+  height = canvas.height = canvas.parentElement.offsetHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function animate() {
+  time += 0.003;
+  ctx.clearRect(0, 0, width, height);
+  
+  // Background flowing gradient
+  const gradient = ctx.createLinearGradient(0, 0, width, height);
+  gradient.addColorStop(0, 'rgba(10, 13, 18, 0)');
+  gradient.addColorStop(0.5, `rgba(200, 134, 56, ${0.05 + Math.sin(time * 2) * 0.03})`); 
+  gradient.addColorStop(1, 'rgba(10, 13, 18, 0)');
+  
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
+
+  // Flowing Wave 1
+  ctx.beginPath();
+  for (let x = 0; x <= width; x += 15) {
+    let y = height * 0.6 + Math.sin(x * 0.002 + time) * 100 + Math.cos(x * 0.001 + time * 1.5) * 40;
+    if(x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.fillStyle = 'rgba(200, 134, 56, 0.04)'; 
+  ctx.fill();
+  
+  // Flowing Wave 2
+  ctx.beginPath();
+  for (let x = 0; x <= width; x += 15) {
+    let y = height * 0.7 + Math.cos(x * 0.0025 + time * 0.8) * 120 + Math.sin(x * 0.003 + time * 1.2) * 60;
+    if(x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.fillStyle = 'rgba(227, 166, 91, 0.03)';
+  ctx.fill();
+
+  requestAnimationFrame(animate);
+}
+// Small delay to ensure styles are loaded
+setTimeout(() => {
+  resize();
+  animate();
+  if (typeof drawStaticWaves === 'function') drawStaticWaves();
+}, 100);
+
+// Static Animated-Style Background for Approaches Section
+const canvas2 = document.getElementById('approachesCanvas');
+const ctx2 = canvas2 ? canvas2.getContext('2d') : null;
+function drawStaticWaves() {
+  if (!canvas2 || !canvas2.parentElement) return;
+  const w = canvas2.width = canvas2.parentElement.offsetWidth;
+  const h = canvas2.height = canvas2.parentElement.offsetHeight;
+  
+  ctx2.clearRect(0, 0, w, h);
+  
+  const gradient = ctx2.createLinearGradient(0, 0, w, h);
+  gradient.addColorStop(0, 'rgba(10, 13, 18, 0)');
+  gradient.addColorStop(0.5, 'rgba(200, 134, 56, 0.05)'); 
+  gradient.addColorStop(1, 'rgba(10, 13, 18, 0)');
+  
+  ctx2.fillStyle = gradient;
+  ctx2.fillRect(0, 0, w, h);
+
+  ctx2.beginPath();
+  for (let x = 0; x <= w; x += 15) {
+    let y = h * 0.4 + Math.sin(x * 0.002 + 5) * 100 + Math.cos(x * 0.001 + 2) * 40;
+    if(x === 0) ctx2.moveTo(x, y);
+    else ctx2.lineTo(x, y);
+  }
+  ctx2.lineTo(w, h);
+  ctx2.lineTo(0, h);
+  ctx2.fillStyle = 'rgba(200, 134, 56, 0.03)'; 
+  ctx2.fill();
+  
+  ctx2.beginPath();
+  for (let x = 0; x <= w; x += 15) {
+    let y = h * 0.5 + Math.cos(x * 0.0025 + 3) * 120 + Math.sin(x * 0.003 + 1) * 60;
+    if(x === 0) ctx2.moveTo(x, y);
+    else ctx2.lineTo(x, y);
+  }
+  ctx2.lineTo(w, h);
+  ctx2.lineTo(0, h);
+  ctx2.fillStyle = 'rgba(227, 166, 91, 0.02)';
+  ctx2.fill();
+}
+window.addEventListener('resize', drawStaticWaves);
+</script>
+</body>
+</html>
