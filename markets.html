@@ -6,16 +6,33 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-:root{--ink:#0a0d12;--paper:#f5f3ee;--cream:#ede9e0;--gold:#c88638;--goldlt:#e3a65b;--slate:#1e2535;--mid:#6b7280;--rule:rgba(10,13,18,.1);--ruleg:rgba(200,134,56,.3);--fd:'Cormorant Garamond',Georgia,serif;--fm:'DM Sans',sans-serif}
+:root{--ink:#0a0d12;--paper:#f5f3ee;--cream:#ede9e0;--gold:#c88638;--goldlt:#e3a65b;--slate:#1e2535;--mid:#6b7280;--rule:rgba(10,13,18,.1);--ruleg:rgba(200,134,56,.3);--fd:'Cormorant Garamond',Georgia,serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0h256v256H0Z' fill='%23fff'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23000'/%3E%3Ccircle cx='96' cy='32' r='2' fill='%23000'/%3E%3Ccircle cx='160' cy='32' r='2' fill='%23000'/%3E%3Ccircle cx='224' cy='32' r='2' fill='%23000'/%3E%3Ccircle cx='32' cy='96' r='2' fill='%23000'/%3E%3Ccircle cx='96' cy='96' r='2' fill='%23000'/%3E%3Ccircle cx='160' cy='96' r='2' fill='%23000'/%3E%3Ccircle cx='224' cy='96' r='2' fill='%23000'/%3E%3Ccircle cx='32' cy='160' r='2' fill='%23000'/%3E%3Ccircle cx='96' cy='160' r='2' fill='%23000'/%3E%3Ccircle cx='160' cy='160' r='2' fill='%23000'/%3E%3Ccircle cx='224' cy='160' r='2' fill='%23000'/%3E%3Ccircle cx='32' cy='224' r='2' fill='%23000'/%3E%3Ccircle cx='96' cy='224' r='2' fill='%23000'/%3E%3Ccircle cx='160' cy='224' r='2' fill='%23000'/%3E%3Ccircle cx='224' cy='224' r='2' fill='%23000'/%3E%3C/svg%3E");background-size:64px 64px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h256v256H0z'/%3E%3C/svg%3E")}
 .tag{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--ruleg);padding:4px 11px}
 .tags{display:flex;flex-wrap:wrap;gap:7px}
-.btn-ghost{font-size:11.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px;border-bottom:1px solid var(--rule);transition:color .25s,border-color .25s}
+.btn-ghost{font-size:11.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px;border-bottom:1px solid var(--ink);transition:color .25s,border-color .25s}
 .btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-container{background:rgba(10,13,18,.95);padding:24px 0;border-top:1px solid rgba(200,134,56,.3);border-bottom:1px solid rgba(200,134,56,.3);overflow:hidden;position:relative}
+.ticker-wrapper{display:flex;animation:scroll 40s linear infinite}
+.ticker-wrapper:hover{animation-play-state:paused}
+.ticker-item{display:flex;align-items:center;gap:24px;padding:0 32px;white-space:nowrap;flex-shrink:0;min-width:fit-content}
+.ticker-symbol{font-family:var(--fm);font-size:13px;font-weight:600;color:var(--goldlt);letter-spacing:.05em}
+.ticker-price{font-family:var(--fm);font-size:13px;font-weight:400;color:var(--paper)}
+.ticker-change{font-family:var(--fm);font-size:12px;font-weight:500;display:flex;align-items:center;gap:4px}
+.ticker-change.positive{color:#10b981}
+.ticker-change.negative{color:#ef4444}
+.ticker-divider{width:1px;height:24px;background:rgba(200,134,56,.2)}
+@media(max-width:768px){
+  .ticker-item{gap:16px;padding:0 20px}
+  .ticker-symbol{font-size:11px}
+  .ticker-price{font-size:11px}
+  .ticker-change{font-size:10px}
+}
 </style>
 </head>
 <body>
@@ -23,46 +40,55 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 <div style="background:var(--slate)">
   <div style="max-width:1300px;margin:0 auto;padding:80px 56px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end">
     <div>
-      <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--goldlt);display:flex;align-items:center;gap:10px;margin-bottom:22px;animation:fadeUp .7s both"><span style="width:16px;height:2px;background:var(--gold)"></span>MARKETS</div>
-      <h1 style="font-family:var(--fd);font-size:clamp(52px,5.5vw,78px);font-weight:300;line-height:1.04;color:var(--paper);margin-bottom:22px;animation:fadeUp .7s .25s both">Deploying Capital<br/><em style="font-style:italic;font-weight:300">Across Markets</em></h1>
-      <p style="font-size:16px;font-weight:300;line-height:1.85;color:rgba(245,243,238,.55);max-width:520px;animation:fadeUp .7s .4s both">We identify and underwrite credit opportunities across established and emerging markets, leveraging deep local relationships and market expertise to structure differentiated deals.</p>
+      <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--goldlt);display:flex;align-items:center;gap:10px;margin-bottom:22px;animation:fadeUp .7s both">
+        <span style="width:12px;height:1px;background:currentColor"></span>MARKETS & OPPORTUNITIES
+      </div>
+      <h1 style="font-family:var(--fd);font-size:clamp(52px,5.5vw,78px);font-weight:300;line-height:1.04;color:var(--paper);margin-bottom:22px;animation:fadeUp .7s .25s both">Deploying Capital<br/><em style="font-style:italic">Globally</em></h1>
+      <p style="font-size:16px;font-weight:300;line-height:1.85;color:rgba(245,243,238,.55);max-width:520px;animation:fadeUp .7s .4s both">We identify and underwrite credit opportunities across established and frontier markets, leveraging deep local relationships and proprietary research.</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;animation:fadeUp .7s .5s both">
-      <div style="background:rgba(255,255,255,.04);padding:28px 24px;border-top:1px solid var(--ruleg)"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">20<span style="font-size:18px">+</span></div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,243,238,.4);margin-top:6px">Years of Experience</div></div>
-      <div style="background:rgba(255,255,255,.04);padding:28px 24px;border-top:1px solid var(--ruleg)"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">6</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,243,238,.4);margin-top:6px">Global Offices</div></div>
-      <div style="background:rgba(255,255,255,.04);padding:28px 24px"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">EM<span style="color:var(--gold)">+</span></div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,243,238,.4);margin-top:6px">Primary Focus</div></div>
-      <div style="background:rgba(255,255,255,.04);padding:28px 24px"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">2</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,243,238,.4);margin-top:6px">Hemispheres</div></div>
+      <div style="background:rgba(255,255,255,.04);padding:28px 24px;border-top:1px solid var(--ruleg)"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">20<span style="color:var(--gold)">+</span></div><div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,134,56,.8);margin-top:8px">Markets Served</div></div>
+      <div style="background:rgba(255,255,255,.04);padding:28px 24px;border-top:1px solid var(--ruleg)"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">6</div><div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,134,56,.8);margin-top:8px">Offices Globally</div></div>
+      <div style="background:rgba(255,255,255,.04);padding:28px 24px"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">EM<span style="color:var(--gold)">+</span></div><div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,134,56,.8);margin-top:8px">Our Focus</div></div>
+      <div style="background:rgba(255,255,255,.04);padding:28px 24px"><div style="font-family:var(--fd);font-size:42px;font-weight:300;color:var(--paper)">2</div><div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,134,56,.8);margin-top:8px">Decades</div></div>
     </div>
+  </div>
+</div>
+
+<!-- LIVE STOCK TICKER -->
+<div class="ticker-container">
+  <div class="ticker-wrapper" id="tickerWrapper">
+    <!-- Ticker items will be populated by JavaScript -->
   </div>
 </div>
 
 <!-- EMERGING MARKETS -->
 <section style="padding:100px 0 0">
   <div style="max-width:1300px;margin:0 auto;padding:0 56px 56px">
-    <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px" class="reveal"><span style="width:12px;height:2px;background:var(--gold)"></span>OPPORTUNITY SET</div>
-    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:14px" class="reveal">Where Capital is <em style="font-style:italic;font-weight:300">Scarce</em></h2>
-    <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--mid);max-width:600px" class="reveal">Emerging markets represent our primary opportunity set — structurally underserved by traditional institutions, offering superior risk-adjusted returns through local market expertise and relationships.</p>
+    <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px" class="reveal"><span style="width:12px;height:1px;background:currentColor"></span>OPPORTUNITY SETS</div>
+    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:14px" class="reveal">Where Capital is <em style="font-style:italic;font-weight:400">Deployed</em></h2>
+    <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--mid);max-width:600px" class="reveal">Emerging markets represent our primary opportunity set — structurally underserved by traditional capital providers yet offering compelling risk-adjusted returns.</p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px">
-    <div style="background:var(--cream);padding:52px 44px;transition:background .25s;cursor:default;position:relative;overflow:hidden" onmouseover="this.style.background='var(--ink)';this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--goldlt)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--paper)');this.querySelectorAll('.mhover').forEach(x=>x.style.color='rgba(245,243,238,.5)')" onmouseout="this.style.background='var(--cream)';this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--gold)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--ink)');this.querySelectorAll('.mhover').forEach(x=>x.style.color='var(--mid)')">
+    <div style="background:var(--cream);padding:52px 44px;transition:background .25s;cursor:default;position:relative;overflow:hidden" onmouseover="this.style.background='var(--ink)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='rgba(245,243,238,.5)');this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--goldlt)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--paper)')" onmouseout="this.style.background='var(--cream)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='var(--mid)');this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--gold)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--ink)')">
       <div style="font-size:32px;margin-bottom:20px">🌍</div>
       <div class="mhregion" style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;transition:color .25s">Sub-Saharan Africa & MENA</div>
       <div class="mhtitle" style="font-family:var(--fd);font-size:26px;font-weight:500;color:var(--ink);margin-bottom:14px;transition:color .25s">Africa & MENA</div>
-      <p class="mhover" style="font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:22px;transition:color .25s">Pan-African and Middle Eastern credit across sovereign, quasi-sovereign, and corporate issuers — supported by growing DFI interest.</p>
+      <p class="mhover" style="font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:22px;transition:color .25s">Pan-African and Middle Eastern credit across sovereign, quasi-sovereign, and corporate issuers with strong fundamentals and DFI support.</p>
       <div class="tags"><span class="tag">Sub-Saharan Africa</span><span class="tag">North Africa</span><span class="tag">Gulf States</span><span class="tag">DFI</span></div>
     </div>
-    <div style="background:var(--cream);padding:52px 44px;transition:background .25s;cursor:default" onmouseover="this.style.background='var(--ink)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='rgba(245,243,238,.5)');this.parentElement.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--goldlt)');this.parentElement.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--paper)')" onmouseout="this.style.background='var(--cream)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='var(--mid)');this.parentElement.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--gold)');this.parentElement.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--ink)')">
+    <div style="background:var(--cream);padding:52px 44px;transition:background .25s;cursor:default" onmouseover="this.style.background='var(--ink)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='rgba(245,243,238,.5)');this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--goldlt)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--paper)')" onmouseout="this.style.background='var(--cream)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='var(--mid)');this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--gold)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--ink)')">
       <div style="font-size:32px;margin-bottom:20px">🌏</div>
       <div class="mhregion" style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;transition:color .25s">Asia Pacific</div>
       <div class="mhtitle" style="font-family:var(--fd);font-size:26px;font-weight:500;color:var(--ink);margin-bottom:14px;transition:color .25s">Asia Pacific</div>
-      <p class="mhover" style="font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:22px;transition:color .25s">Credit in high-growth Southeast and South Asian economies — corporate credit, fintech platforms, and infrastructure financing.</p>
+      <p class="mhover" style="font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:22px;transition:color .25s">Credit in high-growth Southeast and South Asian economies — from sovereign and infrastructure credit to fintech and supply chain financing.</p>
       <div class="tags"><span class="tag">Southeast Asia</span><span class="tag">South Asia</span><span class="tag">Frontier</span></div>
     </div>
-    <div style="background:var(--cream);padding:52px 44px;transition:background .25s;cursor:default" onmouseover="this.style.background='var(--ink)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='rgba(245,243,238,.5)');this.parentElement.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--goldlt)');this.parentElement.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--paper)')" onmouseout="this.style.background='var(--cream)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='var(--mid)');this.parentElement.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--gold)');this.parentElement.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--ink)')">
+    <div style="background:var(--cream);padding:52px 44px;transition:background .25s;cursor:default" onmouseover="this.style.background='var(--ink)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='rgba(245,243,238,.5)');this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--goldlt)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--paper)')" onmouseout="this.style.background='var(--cream)';this.querySelectorAll('.mhover').forEach(x=>x.style.color='var(--mid)');this.querySelectorAll('.mhregion').forEach(x=>x.style.color='var(--gold)');this.querySelectorAll('.mhtitle').forEach(x=>x.style.color='var(--ink)')">
       <div style="font-size:32px;margin-bottom:20px">🌎</div>
       <div class="mhregion" style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;transition:color .25s">Latin America</div>
       <div class="mhtitle" style="font-family:var(--fd);font-size:26px;font-weight:500;color:var(--ink);margin-bottom:14px;transition:color .25s">Latin America</div>
-      <p class="mhover" style="font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:22px;transition:color .25s">Sovereign debt, corporate credit, and fintech credit facilities across major and frontier markets — leveraging multi-decade relationships.</p>
+      <p class="mhover" style="font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:22px;transition:color .25s">Sovereign debt, corporate credit, and fintech credit facilities across the region's leading economies and emerging hubs.</p>
       <div class="tags"><span class="tag">Brazil</span><span class="tag">Mexico</span><span class="tag">Colombia</span><span class="tag">Andean</span></div>
     </div>
   </div>
@@ -71,30 +97,30 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 <!-- MATURE MARKETS -->
 <section style="padding:80px 0 0">
   <div style="max-width:1300px;margin:0 auto;padding:0 56px 56px">
-    <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px" class="reveal"><span style="width:12px;height:2px;background:var(--gold)"></span>DEVELOPED MARKETS</div>
-    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:14px" class="reveal">Deep Relationships in <em style="font-style:italic;font-weight:300">Mature Markets</em></h2>
-    <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--mid);max-width:600px" class="reveal">Our mature market presence enables access to sponsor relationships, M&A deal flow, and financing opportunities across North America and Europe.</p>
+    <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px" class="reveal"><span style="width:12px;height:1px;background:currentColor"></span>DEVELOPED MARKETS</div>
+    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:14px" class="reveal">Deep Relationships in <em style="font-style:italic;font-weight:400">Mature Markets</em></h2>
+    <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--mid);max-width:600px" class="reveal">Our mature market presence enables access to sponsor relationships, M&A deal flow, and financing opportunities unavailable to other emerging market investors.</p>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px">
     <div style="background:var(--ink);padding:52px 44px" class="reveal">
       <div style="font-size:32px;margin-bottom:20px">🇺🇸</div>
       <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--goldlt);margin-bottom:10px">United States & Canada</div>
       <div style="font-family:var(--fd);font-size:26px;font-weight:500;color:var(--paper);margin-bottom:14px">North America</div>
-      <p style="font-size:13.5px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8;margin-bottom:22px">Sponsor-backed M&A credit, middle-market direct lending, and fintech warehouse facilities — structured with deep knowledge of the market.</p>
+      <p style="font-size:13.5px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8;margin-bottom:22px">Sponsor-backed M&A credit, middle-market direct lending, and fintech warehouse facilities.</p>
       <div class="tags"><span class="tag">Direct Lending</span><span class="tag">Sponsor Finance</span><span class="tag">Fintech Credit</span></div>
     </div>
     <div style="background:var(--ink);padding:52px 44px" class="reveal">
       <div style="font-size:32px;margin-bottom:20px">🇬🇧</div>
       <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--goldlt);margin-bottom:10px">UK & Continental Europe</div>
       <div style="font-family:var(--fd);font-size:26px;font-weight:500;color:var(--paper);margin-bottom:14px">Europe</div>
-      <p style="font-size:13.5px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8;margin-bottom:22px">European leveraged credit, cross-border M&A financing, and banking sector credit facilities — structured with local market expertise.</p>
+      <p style="font-size:13.5px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8;margin-bottom:22px">European leveraged credit, cross-border M&A financing, and banking sector credit facilities.</p>
       <div class="tags"><span class="tag">UK & Ireland</span><span class="tag">Western Europe</span><span class="tag">CEE</span></div>
     </div>
     <div style="background:var(--ink);padding:52px 44px" class="reveal">
       <div style="font-size:32px;margin-bottom:20px">🌐</div>
       <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--goldlt);margin-bottom:10px">Multi-Jurisdictional</div>
       <div style="font-family:var(--fd);font-size:26px;font-weight:500;color:var(--paper);margin-bottom:14px">Cross-Border Syndications</div>
-      <p style="font-size:13.5px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8;margin-bottom:22px">Multi-jurisdictional syndicated facilities arranged and co-arranged by GMI — aggregating 2.0B+ in committed capital.</p>
+      <p style="font-size:13.5px;font-weight:300;color:rgba(245,243,238,.5);line-height:1.8;margin-bottom:22px">Multi-jurisdictional syndicated facilities arranged and co-arranged by GMI — aggregating $4.2B in capital.</p>
       <div class="tags"><span class="tag">Multi-Currency</span><span class="tag">Lead Arranger</span><span class="tag">Club Deals</span></div>
     </div>
   </div>
@@ -103,21 +129,113 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 <!-- OFFICES -->
 <section style="background:var(--cream);padding:100px 0">
   <div style="max-width:1300px;margin:0 auto;padding:0 56px">
-    <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px" class="reveal"><span style="width:12px;height:2px;background:var(--gold)"></span>PRESENCE</div>
-    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:48px" class="reveal">Locally Positioned,<br/><em style="font-style:italic;font-weight:300">Globally Connected</em></h2>
+    <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px" class="reveal"><span style="width:12px;height:1px;background:currentColor"></span>PRESENCE</div>
+    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:48px" class="reveal">Locally Positioned,<br/><em style="font-style:italic;font-weight:400">Globally Connected</em></h2>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px">
       <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--gold)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">New York</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">HQ</div></div>
-      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">London</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">Europe</div></div>
-      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Lagos</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">Africa</div></div>
-      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Mumbai</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">Asia</div></div>
-      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">São Paulo</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">LatAm</div></div>
+      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">London</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">EMEA</div></div>
+      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">Singapore</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">APAC</div></div>
+      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">São Paulo</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">LATAM</div></div>
+      <div style="background:#fff;padding:36px 28px;border-top:2px solid var(--rule)" class="reveal"><div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">Johannesburg</div><div style="font-family:var(--fd);font-size:18px;font-weight:400;color:var(--ink)">Africa</div></div>
     </div>
   </div>
 </section>
 
 <script>
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){setTimeout(()=>x.target.classList.add('visible'),60);obs.unobserve(x.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Initialize ticker
+const STOCKS = [
+  { symbol: 'SPY', name: 'S&P 500' },
+  { symbol: 'VEA', name: 'MSCI EAFE' },
+  { symbol: 'VWO', name: 'MSCI EM' },
+  { symbol: 'ACWX', name: 'MSCI ACWX' },
+  { symbol: 'JNK', name: 'High Yield' },
+  { symbol: 'VCIT', name: 'Corporate Bonds' },
+  { symbol: 'GLD', name: 'Gold' },
+  { symbol: 'USO', name: 'Crude Oil' }
+];
+
+const API_KEY = 'demo'; // Free tier for demo - replace with your Alpha Vantage API key
+const BASE_URL = 'https://www.alphavantage.co/query';
+
+// Fallback data for demo purposes
+const FALLBACK_DATA = {
+  'SPY': { price: 452.89, change: 0.75 },
+  'VEA': { price: 49.32, change: 1.12 },
+  'VWO': { price: 38.45, change: 2.34 },
+  'ACWX': { price: 65.12, change: 1.45 },
+  'JNK': { price: 102.34, change: 0.56 },
+  'VCIT': { price: 82.91, change: -0.34 },
+  'GLD': { price: 189.45, change: 1.89 },
+  'USO': { price: 68.72, change: -0.45 }
+};
+
+async function fetchStockData(symbol) {
+  try {
+    const response = await fetch(`${BASE_URL}?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`);
+    const data = await response.json();
+    
+    if (data['Global Quote']) {
+      const quote = data['Global Quote'];
+      const price = parseFloat(quote['05. price']) || FALLBACK_DATA[symbol].price;
+      const change = parseFloat(quote['09. change']) || FALLBACK_DATA[symbol].change;
+      return { price, change };
+    }
+    return FALLBACK_DATA[symbol];
+  } catch (error) {
+    console.warn(`Error fetching ${symbol}, using fallback data`);
+    return FALLBACK_DATA[symbol];
+  }
+}
+
+async function initializeTicker() {
+  const wrapper = document.getElementById('tickerWrapper');
+  const tickerHTML = [];
+  
+  for (const stock of STOCKS) {
+    const data = await fetchStockData(stock.symbol);
+    const isPositive = data.change >= 0;
+    const changePercent = ((data.change / data.price) * 100).toFixed(2);
+    
+    const tickerItem = `
+      <div class="ticker-item">
+        <div class="ticker-symbol">${stock.symbol}</div>
+        <div class="ticker-price">$${data.price.toFixed(2)}</div>
+        <div class="ticker-change ${isPositive ? 'positive' : 'negative'}">
+          <span>${isPositive ? '▲' : '▼'}</span>
+          <span>${Math.abs(changePercent)}%</span>
+        </div>
+        <div class="ticker-divider"></div>
+      </div>
+    `;
+    tickerHTML.push(tickerItem);
+  }
+  
+  // Duplicate for seamless loop
+  const allHTML = tickerHTML.join('') + tickerHTML.join('');
+  wrapper.innerHTML = allHTML;
+}
+
+// Intersection Observer for reveal animation
+const obs = new IntersectionObserver(e => {
+  e.forEach(x => {
+    if (x.isIntersecting) {
+      setTimeout(() => x.target.classList.add('visible'), 60);
+      obs.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Initialize ticker on page load
+window.addEventListener('load', initializeTicker);
+
+// Fallback: initialize immediately if DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeTicker);
+} else {
+  initializeTicker();
+}
 </script>
 </body>
 </html>
