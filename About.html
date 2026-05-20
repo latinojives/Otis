@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — GMI Global Capital Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#0a0d12;
+  --paper:#f5f3ee;
+  --cream:#ede9e0;
+  --gold:#c88638;
+  --goldlt:#e3a65b;
+  --slate:#1e2535;
+  --mid:#6b7280;
+  --rule:rgba(10,13,18,.1);
+  --ruleg:rgba(184,150,96,.3);
+  --fd:'Cormorant Garamond',Georgia,serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* ── reveal ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-22px);transition:opacity .75s ease,transform .75s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── shared typography ── */
+.label{font-family:var(--fm);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.label::before{content:'';display:block;width:22px;height:1px;background:var(--gold)}
+.label.light{color:var(--goldlt)}
+.label.light::before{background:var(--goldlt)}
+
+/* ── cursor glow ── */
+#glow{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:opacity .5s;opacity:0;background:radial-gradient(circle,rgba(200,134,56,.07) 0%,transparent 70%)}
+
+/* ── HERO ── */
+.hero{background:var(--ink);position:relative;overflow:hidden;padding:110px 56px 100px}
+.hero-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
+.hero-title{font-family:var(--fd);font-size:clamp(60px,6.5vw,96px);font-weight:300;line-height:.98;color:var(--paper);letter-spacing:-.01em}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:17px;font-weight:300;line-height:1.9;color:rgba(245,243,238,.5);padding-bottom:4px}
+.hero-rule{width:48px;height:1px;background:var(--ruleg);margin-bottom:28px}
+
+/* ── large number accent ── */
+.big-num{font-family:var(--fd);font-size:clamp(72px,8vw,120px);font-weight:300;color:var(--paper);line-height:.9;letter-spacing:-.03em}
+.big-num span{color:var(--gold)}
+
+/* ── ORIGIN section ── */
+.origin{max-width:1300px;margin:0 auto;padding:100px 56px}
+.origin-grid{display:grid;grid-template-columns:5fr 4fr;gap:100px;align-items:start}
+.body-lg{font-family:var(--fd);font-size:clamp(22px,2.2vw,32px);font-weight:300;line-height:1.45;color:var(--ink)}
+.body-lg em{font-style:italic;color:var(--gold)}
+.body-sm{font-size:14px;font-weight:300;line-height:1.9;color:var(--mid)}
+
+/* ── ETHOS band ── */
+.ethos-band{background:var(--cream);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ethos-inner{max-width:1300px;margin:0 auto;padding:0 56px;display:grid;grid-template-columns:repeat(3,1fr)}
+.ethos-cell{padding:64px 48px;border-right:1px solid var(--rule);transition:background .3s;position:relative;overflow:hidden}
+.ethos-cell:last-child{border-right:none}
+.ethos-cell:hover{background:#fff}
+.ethos-cell::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .5s}
+.ethos-cell:hover::after{width:100%}
+.ethos-num{font-family:var(--fd);font-size:48px;font-weight:300;color:var(--gold);opacity:.25;line-height:1;margin-bottom:20px}
+.ethos-title{font-family:var(--fd);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:12px}
+.ethos-body{font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.85}
+
+/* ── FOUNDING / TIMELINE ── */
+.timeline{max-width:1300px;margin:0 auto;padding:100px 56px}
+.tl-row{display:grid;grid-template-columns:160px 1px 1fr;gap:0 40px;align-items:start;margin-bottom:0}
+.tl-row+.tl-row .tl-line{border-top:none}
+.tl-year{font-family:var(--fd);font-size:32px;font-weight:300;color:var(--gold);line-height:1;padding-top:4px;text-align:right}
+.tl-line{background:var(--rule);position:relative}
+.tl-line::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--ruleg)}
+.tl-content{padding:0 0 64px 0}
+.tl-event{font-family:var(--fd);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:8px;margin-top:2px}
+.tl-desc{font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.8;max-width:540px}
+
+/* ── PEOPLE ── */
+.people{background:var(--slate);padding:100px 56px;position:relative;overflow:hidden}
+.people-inner{max-width:1300px;margin:0 auto}
+.people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+.person-card{background:rgba(255,255,255,.03);padding:48px 40px;border:1px solid rgba(255,255,255,.06);transition:background .3s,border-color .3s;position:relative;overflow:hidden}
+.person-card:hover{background:rgba(255,255,255,.06);border-color:rgba(200,134,56,.25)}
+.person-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--gold);transition:height .4s}
+.person-card:hover::before{height:100%}
+.person-initial{font-family:var(--fd);font-size:52px;font-weight:300;color:var(--gold);opacity:.2;line-height:1;margin-bottom:20px}
+.person-name{font-family:var(--fd);font-size:22px;font-weight:500;color:var(--paper);margin-bottom:4px}
+.person-title{font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.3);margin-bottom:18px}
+.person-bio{font-size:13px;font-weight:300;color:rgba(245,243,238,.45);line-height:1.85}
+
+/* ── PRESENCE ── */
+.presence{max-width:1300px;margin:0 auto;padding:100px 56px}
+.offices{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--rule);margin-top:48px}
+.office{padding:36px 32px;border-right:1px solid var(--rule);transition:background .25s}
+.office:last-child{border-right:none}
+.office:hover{background:var(--cream)}
+.office-city{font-family:var(--fd);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.office-country{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
+.office-role{font-size:12px;font-weight:300;color:var(--mid);margin-top:8px;line-height:1.6}
+
+/* ── CONVICTION ── */
+.conviction{background:var(--ink);padding:100px 56px;position:relative;overflow:hidden}
+.conviction-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.conviction-quote{font-family:var(--fd);font-size:clamp(28px,3vw,42px);font-weight:300;color:var(--paper);line-height:1.35;font-style:italic}
+.conviction-quote em{color:var(--gold);font-style:normal}
+.conviction-values{display:flex;flex-direction:column;gap:1px}
+.val-row{padding:24px 32px;background:rgba(255,255,255,.03);border-left:2px solid transparent;transition:all .3s;cursor:default}
+.val-row:hover{background:rgba(255,255,255,.06);border-left-color:var(--gold)}
+.val-name{font-family:var(--fd);font-size:17px;font-weight:500;color:var(--paper);margin-bottom:4px}
+.val-desc{font-size:12.5px;font-weight:300;color:rgba(245,243,238,.38);line-height:1.7}
+
+/* ── CTA ── */
+.cta-band{background:var(--cream);padding:90px 56px;border-top:1px solid var(--rule)}
+.cta-inner{max-width:700px;margin:0 auto;text-align:center}
+.btn-ink{font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:16px 40px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-ink:hover{background:var(--slate)}
+</style>
+</head>
+<body>
+
+<div id="glow"></div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<div class="hero">
+  <canvas id="heroCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+  <div class="hero-inner" style="position:relative;z-index:1">
+    <div>
+      <div class="label light" style="animation:fadeUp .6s .1s both">About GMI</div>
+      <h1 class="hero-title" style="animation:fadeUp .7s .2s both">
+        Capital with<br/><em>Conviction.</em><br/>
+        <span style="font-weight:300;color:rgba(245,243,238,.35)">Partnerships</span><br/>
+        <span style="font-weight:300;color:rgba(245,243,238,.35)">built to</span> <em>last.</em>
+      </h1>
+    </div>
+    <div style="animation:fadeUp .7s .4s both">
+      <div class="hero-rule"></div>
+      <p class="hero-sub">GMI Global Capital Partners was founded on a single conviction: that the world's most consequential credit opportunities exist at the edges of where traditional capital is willing to go. We exist to close that gap — with discipline, integrity, and institutional rigour.</p>
+      <div style="display:flex;gap:48px;margin-top:48px;border-top:1px solid rgba(255,255,255,.06);padding-top:40px">
+        <div>
+          <div class="big-num">$<span>4</span>B</div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.28);margin-top:10px">Capital Deployed</div>
+        </div>
+        <div>
+          <div class="big-num">12<span>+</span></div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.28);margin-top:10px">Years in Markets</div>
+        </div>
+        <div>
+          <div class="big-num">5</div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.28);margin-top:10px">Global Offices</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ORIGIN ══════════════ -->
+<section>
+  <div class="origin">
+    <div class="origin-grid">
+      <div>
+        <div class="label reveal">Our Story</div>
+        <p class="body-lg reveal">We began with a question that most institutions were not asking: <em>why does disciplined, institutional-grade capital rarely reach the places that need it most?</em></p>
+        <p class="body-lg reveal" style="margin-top:24px">The answer, we found, was not risk. It was <em>proximity.</em></p>
+      </div>
+      <div style="padding-top:56px">
+        <p class="body-sm reveal">GMI was established in Houston, Texas — a city forged by the intersection of energy, enterprise, and global capital flows. From the start, we operated differently. Where others saw complexity as a barrier, we built the expertise to navigate it. Where others saw emerging markets as peripheral, we saw them as the frontier of the next generation of credit opportunity.</p>
+        <p class="body-sm reveal" style="margin-top:20px">Our platform was constructed to sit at the centre of that frontier — anchored by deep institutional relationships in North America, with an ever-sharpening focus on the markets others overlook: Sub-Saharan Africa, MENA, and the fast-evolving economies of the Global South.</p>
+        <p class="body-sm reveal" style="margin-top:20px">Today, GMI is one of the few private credit managers with genuine operational presence across these geographies — not as a tourist, but as a long-term capital partner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ETHOS ══════════════ -->
+<div class="ethos-band">
+  <div class="ethos-inner">
+    <div class="ethos-cell reveal">
+      <div class="ethos-num">01</div>
+      <div class="ethos-title">Patient Capital</div>
+      <div class="ethos-body">We do not chase quarterly cycles. We structure credit with an investment horizon that matches the real timelines of business creation, market development, and wealth generation — particularly in emerging economies where compounding takes time.</div>
+    </div>
+    <div class="ethos-cell reveal">
+      <div class="ethos-num">02</div>
+      <div class="ethos-title">Structural Discipline</div>
+      <div class="ethos-body">Every transaction we enter is stress-tested against downside scenarios before it is evaluated for upside. Our underwriting begins with the question of capital preservation, and ends with the architecture of return. We do not yield on structure for the sake of deal volume.</div>
+    </div>
+    <div class="ethos-cell reveal">
+      <div class="ethos-num">03</div>
+      <div class="ethos-title">Genuine Partnership</div>
+      <div class="ethos-body">Our most enduring relationships — with borrowers, co-investors, and sovereign counterparties — were not built on terms alone. They were built on follow-through, transparency, and the understanding that capital is only as valuable as the trust that accompanies it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TIMELINE ══════════════ -->
+<section>
+  <div class="timeline">
+    <div class="label reveal">Milestones</div>
+    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;color:var(--ink);margin-bottom:72px" class="reveal">A Decade of <em style="font-style:italic;color:var(--gold)">Deliberate Growth</em></h2>
+
+    <div class="tl-row reveal">
+      <div class="tl-year">2013</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <div class="tl-event">Founded in Houston, Texas</div>
+        <div class="tl-desc">GMI Global Capital Partners is established with a focus on private credit and structured finance for North American mid-market corporate borrowers and financial sponsors.</div>
+      </div>
+    </div>
+    <div class="tl-row reveal">
+      <div class="tl-year">2016</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <div class="tl-event">New York & London Offices Open</div>
+        <div class="tl-desc">Expanding access to global capital markets, the firm establishes institutional presence on both coasts of the Atlantic — deepening relationships with European sponsors and cross-border M&A deal flow.</div>
+      </div>
+    </div>
+    <div class="tl-row reveal">
+      <div class="tl-year">2019</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <div class="tl-event">First Sovereign Credit Allocation — MENA</div>
+        <div class="tl-desc">GMI completes its first significant allocation to Gulf sovereign and quasi-sovereign debt instruments, establishing the firm's emerging market credit capabilities and research infrastructure.</div>
+      </div>
+    </div>
+    <div class="tl-row reveal">
+      <div class="tl-year">2021</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <div class="tl-event">Fintech Credit Platform Launched</div>
+        <div class="tl-desc">GMI launches its structured credit facility offering for digital lenders and fintech platforms — becoming one of the first institutional private credit managers to formally address the capital needs of next-generation financial institutions at scale.</div>
+      </div>
+    </div>
+    <div class="tl-row reveal">
+      <div class="tl-year">2023</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <div class="tl-event">South Africa Office — Africa Strategy Commences</div>
+        <div class="tl-desc">The firm opens its Johannesburg office and formally initiates its Pan-African private credit strategy, beginning due diligence across Sub-Saharan sovereign, banking, and corporate credit markets.</div>
+      </div>
+    </div>
+    <div class="tl-row reveal">
+      <div class="tl-year">2026</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <div class="tl-event">GMI Fund Africa — Active Pipeline</div>
+        <div class="tl-desc">GMI Fund Africa enters active deployment phase across six Sub-Saharan markets. The firm surpasses $4B in cumulative capital deployed globally and deepens its Hong Kong presence to serve Asia-Pacific institutional allocators.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PEOPLE ══════════════ -->
+<section class="people">
+  <div class="people-inner">
+    <div class="label light reveal">Leadership</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:0">
+      <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;color:var(--paper);line-height:1.1" class="reveal">The <em style="color:var(--gold)">People</em><br/>Behind the Capital</h2>
+      <p style="font-size:14px;font-weight:300;color:rgba(245,243,238,.45);line-height:1.85;padding-bottom:4px" class="reveal">Our leadership team brings together decades of institutional credit experience across global investment banks, sovereign wealth funds, and development finance institutions — united by a shared belief in the power of patient, structured private capital.</p>
+    </div>
+
+    <div class="people-grid">
+      <div class="person-card reveal">
+        <div class="person-initial">A</div>
+        <div class="person-name">Alexander Merritt</div>
+        <div class="person-title">Founder & Chief Executive Officer</div>
+        <div class="person-bio">Thirty years across credit markets in New York, London, and Houston. Former Managing Director at a bulge-bracket investment bank, where he led the structured credit division through two full market cycles. Founded GMI with the conviction that private credit's next decade would be shaped by emerging market access, not developed market saturation.</div>
+      </div>
+      <div class="person-card reveal">
+        <div class="person-initial">N</div>
+        <div class="person-name">Ngozi Adeyemi</div>
+        <div class="person-title">Chief Investment Officer</div>
+        <div class="person-bio">Former Head of Africa Credit at a leading development finance institution, where she structured over $2B in sovereign and corporate facilities across twelve countries. Joined GMI to build the firm's African credit platform from the ground up — bringing relationships, regulatory knowledge, and first-hand market intelligence that no model can replicate.</div>
+      </div>
+      <div class="person-card reveal">
+        <div class="person-initial">D</div>
+        <div class="person-name">David Hsu</div>
+        <div class="person-title">Managing Director, Asia-Pacific</div>
+        <div class="person-bio">Based in Hong Kong, David leads GMI's Asia-Pacific institutional relationships and co-lending syndication efforts. Previously at a major sovereign wealth fund, where he managed cross-border private credit exposure across Southeast Asia and the Indian subcontinent. Joined GMI to extend its reach into Asia's fast-growing LP base.</div>
+      </div>
+      <div class="person-card reveal">
+        <div class="person-initial">S</div>
+        <div class="person-name">Sarah Okonkwo</div>
+        <div class="person-title">Head of Structured Finance</div>
+        <div class="person-bio">Sarah architects GMI's most complex credit structures — from multi-tranche unitranche facilities in cross-border M&A to bespoke warehouse lines for fintech platforms. A former structured finance partner at a global law firm turned principal, she brings the rare combination of legal precision and capital markets intuition.</div>
+      </div>
+      <div class="person-card reveal">
+        <div class="person-initial">M</div>
+        <div class="person-name">Marcus Thornton</div>
+        <div class="person-title">Chief Risk Officer</div>
+        <div class="person-bio">Marcus leads GMI's risk architecture across all four mandates. Twenty-two years in credit risk, including a decade at the Federal Reserve Bank of New York and senior roles at two of the world's largest asset managers. His frameworks govern how GMI prices, structures, and monitors credit exposure — from Houston to Nairobi.</div>
+      </div>
+      <div class="person-card reveal">
+        <div class="person-initial">I</div>
+        <div class="person-name">Ifeoma Obi</div>
+        <div class="person-title">Director, Investor Relations</div>
+        <div class="person-bio">The primary relationship manager for GMI's institutional investor base. Ifeoma oversees LP communications, capital raising strategy, and investor reporting across the firm's funds. She joined from a major alternative asset manager in London, where she managed relationships with pension funds, endowments, and sovereign allocators across EMEA.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ OFFICES ══════════════ -->
+<section>
+  <div class="presence">
+    <div class="label reveal">Where We Operate</div>
+    <h2 style="font-family:var(--fd);font-size:clamp(32px,3.2vw,48px);font-weight:300;color:var(--ink);line-height:1.1" class="reveal">Five Offices.<br/><em style="font-style:italic;color:var(--gold)">One Standard.</em></h2>
+    <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;max-width:600px;margin-top:20px" class="reveal">Our offices are not outposts — they are operating hubs, each staffed by professionals with deep local market knowledge and global institutional standards. Wherever we operate, the rigour is the same.</p>
+    <div class="offices reveal">
+      <div class="office">
+        <div class="office-city">Houston</div>
+        <div class="office-country">United States</div>
+        <div class="office-role">Global Headquarters · Investment Committee · Structured Finance</div>
+      </div>
+      <div class="office">
+        <div class="office-city">New York</div>
+        <div class="office-country">United States</div>
+        <div class="office-role">M&A Credit · LP Relations · Syndications Desk</div>
+      </div>
+      <div class="office">
+        <div class="office-city">London</div>
+        <div class="office-country">United Kingdom</div>
+        <div class="office-role">European Credit · MENA Coverage · Regulatory Affairs</div>
+      </div>
+      <div class="office">
+        <div class="office-city">Hong Kong</div>
+        <div class="office-country">China SAR</div>
+        <div class="office-role">Asia-Pacific LP Relations · Co-Lending · Market Intelligence</div>
+      </div>
+      <div class="office" style="border-right:none">
+        <div class="office-city">Johannesburg</div>
+        <div class="office-country">South Africa</div>
+        <div class="office-role">Pan-Africa Strategy · Sovereign Coverage · GMI Fund Africa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONVICTION ══════════════ -->
+<section class="conviction">
+  <canvas id="convCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+  <div class="conviction-inner" style="position:relative;z-index:1">
+    <div>
+      <div class="label light reveal">What We Believe</div>
+      <p class="conviction-quote reveal">"The most important thing a capital manager can offer is not a return target — it is the <em>integrity</em> to pursue it exactly as described, in good markets and difficult ones alike."</p>
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,243,238,.22);margin-top:24px" class="reveal">Alexander Merritt · Founder & CEO</div>
+    </div>
+    <div class="conviction-values reveal">
+      <div class="val-row">
+        <div class="val-name">Integrity Before Return</div>
+        <div class="val-desc">We will walk away from a transaction that requires compromise on structure, disclosure, or counterparty standards — regardless of the headline yield.</div>
+      </div>
+      <div class="val-row">
+        <div class="val-name">Intelligence Over Assumption</div>
+        <div class="val-desc">We do not price risk from a spreadsheet alone. Our underwriting is informed by on-the-ground intelligence, proprietary data, and relationships that take years to cultivate.</div>
+      </div>
+      <div class="val-row">
+        <div class="val-name">Long-Term Over Transactional</div>
+        <div class="val-desc">We measure the quality of a relationship not at close, but at renewal. Our best borrowers and investors have been with GMI through multiple market cycles.</div>
+      </div>
+      <div class="val-row">
+        <div class="val-name">Inclusion as Strategy</div>
+        <div class="val-desc">Directing capital toward historically underserved markets is not philanthropy — it is the recognition that the best risk-adjusted opportunities increasingly exist where others are not looking.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <div class="label reveal" style="justify-content:center">Work With GMI</div>
+    <h2 style="font-family:var(--fd);font-size:clamp(34px,3.5vw,52px);font-weight:300;color:var(--ink);line-height:1.15;margin-bottom:20px" class="reveal">
+      Ready to explore a<br/><em style="font-style:italic;color:var(--gold)">capital partnership?</em>
+    </h2>
+    <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:40px" class="reveal">Whether you are a sovereign borrower, a corporate issuer, a co-lending partner, or a qualified institutional investor — we welcome the conversation. Our relationships begin with listening.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap" class="reveal">
+      <a href="investor-access.html" class="btn-ink">Investor Access</a>
+      <a href="mailto:ir@gmi-co.com" style="font-size:11.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:7px;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:color .2s,border-color .2s;padding:16px 0" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'">ir@gmi-co.com →</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── Reveal observer ──
+const obs = new IntersectionObserver(e => {
+  e.forEach(x => { if (x.isIntersecting) { setTimeout(() => x.target.classList.add('visible'), 60); obs.unobserve(x.target) } })
+}, { threshold: .07, rootMargin: '0px 0px -32px 0px' });
+document.querySelectorAll('.reveal, .reveal-left').forEach(el => obs.observe(el));
+
+// ── Cursor glow ──
+const glow = document.getElementById('glow');
+document.addEventListener('mousemove', e => { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; glow.style.opacity = '1' });
+document.addEventListener('mouseleave', () => { glow.style.opacity = '0' });
+
+// ── Canvas helper ──
+function makeWave(id, colors, speeds, opacities) {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let t = 0, w, h;
+  const resize = () => {
+    if (!canvas.parentElement) return;
+    w = canvas.width = canvas.parentElement.offsetWidth;
+    h = canvas.height = canvas.parentElement.offsetHeight;
+  };
+  window.addEventListener('resize', resize);
+  resize();
+  const draw = () => {
+    t += 0.0025;
+    ctx.clearRect(0, 0, w, h);
+    colors.forEach((col, i) => {
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 14) {
+        const y = h * (0.5 + i * 0.15) + Math.sin(x * 0.002 + t * speeds[i]) * 80 + Math.cos(x * 0.0015 + t * speeds[i] * 0.7) * 40;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.lineTo(w, h); ctx.lineTo(0, h);
+      ctx.fillStyle = col.replace('OPACITY', opacities[i]);
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  };
+  setTimeout(() => { resize(); draw(); }, 120);
+}
+
+makeWave('heroCanvas',
+  ['rgba(200,134,56,OPACITY)', 'rgba(227,166,91,OPACITY)'],
+  [1.1, 0.7],
+  [0.045, 0.025]
+);
+makeWave('convCanvas',
+  ['rgba(200,134,56,OPACITY)', 'rgba(30,37,53,OPACITY)'],
+  [0.9, 1.3],
+  [0.04, 0.06]
+);
+</script>
+</body>
+</html>
