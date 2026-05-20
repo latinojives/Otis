@@ -41,9 +41,6 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .label.light{color:var(--goldlt)}
 .label.light::before{background:var(--goldlt)}
 
-/* ── cursor glow ── */
-#glow{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:opacity .5s;opacity:0;background:radial-gradient(circle,rgba(200,134,56,.07) 0%,transparent 70%)}
-
 /* ── HERO ── */
 .hero{background:var(--ink);position:relative;overflow:hidden;padding:110px 56px 100px}
 .hero-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
@@ -138,27 +135,13 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     <div>
       <div class="label light" style="animation:fadeUp .6s .1s both">About GMI</div>
       <h1 class="hero-title" style="animation:fadeUp .7s .2s both">
-        Capital with<br/><em>Conviction.</em><br/>
-        <span style="font-weight:300;color:rgba(245,243,238,.35)">Partnerships</span><br/>
-        <span style="font-weight:300;color:rgba(245,243,238,.35)">built to</span> <em>last.</em>
+        <span style="font-weight:300;color:rgba(245,243,238,.95)">Partnerships</span><br/>
+        <span style="font-weight:300;color:rgba(245,243,238,.95)">built to</span> <em>last.</em>
       </h1>
     </div>
     <div style="animation:fadeUp .7s .4s both">
       <div class="hero-rule"></div>
       <p class="hero-sub">GMI Global Capital Partners was founded on a single conviction: that the world's most consequential credit opportunities exist at the edges of where traditional capital is willing to go. We exist to close that gap — with discipline, integrity, and institutional rigour.</p>
-      <div style="display:flex;gap:48px;margin-top:48px;border-top:1px solid rgba(255,255,255,.06);padding-top:40px">
-        <div>
-          <div class="big-num">$<span>4</span>B</div>
-          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.28);margin-top:10px">Capital Deployed</div>
-        </div>
-        <div>
-          <div class="big-num">12<span>+</span></div>
-          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.28);margin-top:10px">Years in Markets</div>
-        </div>
-        <div>
-          <div class="big-num">5</div>
-          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,238,.28);margin-top:10px">Global Offices</div>
-        </div>
       </div>
     </div>
   </div>
