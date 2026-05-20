@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights — GMI Global Capital Partners</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0d12;
+      --paper: #f5f3ee;
+      --cream: #ede9e0;
+      --gold: #c88638;
+      --goldlt: #c88638;
+      --slate: #1e2535;
+      --mid: #6b7280;
+      --rule: rgba(10, 13, 18, .1);
+      --ruleg: rgba(184, 150, 96, .3);
+      --fd: 'Cormorant Garamond', Georgia, serif;
+      --fb: 'DM Sans', sans-serif;
+      --fm: 'DM Mono', monospace
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body {
+      font-family: var(--fb);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0) }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px) }
+      to { opacity: 1; transform: translateY(0) }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg) }
+    }
+
+    /* ── card style ── */
+    .icard {
+      background: var(--cream);
+      padding: 44px 40px;
+      cursor: pointer;
+      transition: background .25s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      color: inherit
+    }
+    .icard:hover { background: #fff }
+    .icard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 3px;
+      background: var(--gold);
+      transition: width .4s
+    }
+    .icard:hover::before { width: 100% }
+
+    /* ── news section header ── */
+    .news-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px
+    }
+    .news-source-badge {
+      font-family: var(--fm);
+      font-size: 9px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--rule);
+      padding: 5px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+    .live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: livePulse 2s infinite
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1 }
+      50% { opacity: .3 }
+    }
+
+    /* ── skeleton loading ── */
+    .skel { background: linear-gradient(90deg, var(--cream) 25%, #e8e4db 50%, var(--cream) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 2px }
+    @keyframes shimmer { to { background-position: -200% 0 } }
+
+    /* ── refresh button ── */
+    .btn-refresh {
+      font-family: var(--fm);
+      font-size: 9px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--rule);
+      background: transparent;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+    .btn-refresh:hover { border-color: var(--gold); color: var(--gold) }
+    .btn-refresh.spinning svg { animation: spin .8s linear infinite }
+  </style>
+</head>
+<body>
+
+  <!-- HERO (no nav padding needed) -->
+  <div style="background:var(--paper);border-bottom:1px solid var(--rule)">
+    <div style="max-width:1300px;margin:0 auto;padding:80px 56px 60px">
+      <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:22px;animation:fadeUp .7s .1s both">
+        <span style="display:block;width:24px;height:1px;background:var(--gold)"></span>Market Intelligence
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px">
+        <h1 style="font-family:var(--fd);font-size:clamp(52px,5.5vw,78px);font-weight:300;line-height:1.04;color:var(--ink);animation:fadeUp .7s .25s both">
+          GMI <em style="font-style:italic;color:var(--gold)">Insights</em>
+        </h1>
+        <p style="font-size:15px;font-weight:300;line-height:1.8;color:var(--mid);max-width:420px;animation:fadeUp .7s .4s both">
+          Research, analysis, and market perspectives from GMI's investment team — alongside live intelligence from global financial markets.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED (unchanged) -->
+  <section style="padding:80px 0 0">
+    <div style="max-width:1300px;margin:0 auto;padding:0 56px">
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:24px">Featured</div>
+      <div style="background:var(--ink);padding:64px 60px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center" class="reveal">
+        <div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--goldlt);margin-bottom:16px">Private Credit · Research</div>
+          <div style="font-family:var(--fd);font-size:38px;font-weight:300;color:var(--paper);line-height:1.15;margin-bottom:20px">The Rise of Direct Lending in Emerging Market M&A</div>
+          <p style="font-size:14px;font-weight:300;color:rgba(245,243,238,.55);line-height:1.85;margin-bottom:32px">As traditional bank financing retreats from complex cross-border acquisitions, private credit managers are filling the void — often as the only viable source of flexible, covenant-light institutional capital. GMI examines the structural drivers behind this shift and the opportunity it presents.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;color:rgba(245,243,238,.3)">GMI Research · March 2026 · 12 min read</div>
+            <a href="#" style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--ruleg);padding-bottom:2px;text-decoration:none">Read Report →</a>
+          </div>
+        </div>
+        <div style="border-left:1px solid rgba(255,255,255,.08);padding-left:60px">
+          <div style="font-family:var(--fd);font-size:22px;font-weight:300;color:rgba(245,243,238,.5);font-style:italic;line-height:1.6;margin-bottom:24px">"Private credit is no longer an alternative — it is becoming the primary source of acquisition financing for cross-border deals in emerging markets."</div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.12em;color:rgba(245,243,238,.25)">GMI Investment Committee, Q1 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MARKET NEWS -->
+  <section style="padding:72px 0 100px" id="articles">
+    <div style="max-width:1300px;margin:0 auto;padding:0 56px">
+
+      <!-- Section header -->
+      <div class="news-header reveal">
+        <div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">Live Market Intelligence</div>
+          <div style="font-family:var(--fd);font-size:28px;font-weight:300;color:var(--ink)">Global Finance & <em style="font-style:italic;color:var(--gold)">Markets News</em></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="news-source-badge">
+            <span class="live-dot"></span>
+            Live · Yahoo Finance
+          </div>
+          <button class="btn-refresh" id="refreshBtn" onclick="loadNews()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px" id="newsGrid">
+        <!-- Skeleton placeholders -->
+        <div class="icard" id="skel1">
+          <div class="skel" style="width:60%;height:10px;margin-bottom:14px"></div>
+          <div class="skel" style="width:90%;height:18px;margin-bottom:8px"></div>
+          <div class="skel" style="width:75%;height:18px;margin-bottom:16px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:60%;height:11px;margin-bottom:28px"></div>
+          <div style="border-top:1px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between">
+            <div class="skel" style="width:35%;height:9px"></div>
+            <div class="skel" style="width:25%;height:9px"></div>
+          </div>
+        </div>
+        <div class="icard" id="skel2">
+          <div class="skel" style="width:55%;height:10px;margin-bottom:14px"></div>
+          <div class="skel" style="width:85%;height:18px;margin-bottom:8px"></div>
+          <div class="skel" style="width:70%;height:18px;margin-bottom:16px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:95%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:50%;height:11px;margin-bottom:28px"></div>
+          <div style="border-top:1px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between">
+            <div class="skel" style="width:35%;height:9px"></div>
+            <div class="skel" style="width:25%;height:9px"></div>
+          </div>
+        </div>
+        <div class="icard" id="skel3">
+          <div class="skel" style="width:65%;height:10px;margin-bottom:14px"></div>
+          <div class="skel" style="width:80%;height:18px;margin-bottom:8px"></div>
+          <div class="skel" style="width:90%;height:18px;margin-bottom:16px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:88%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:55%;height:11px;margin-bottom:28px"></div>
+          <div style="border-top:1px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between">
+            <div class="skel" style="width:35%;height:9px"></div>
+            <div class="skel" style="width:25%;height:9px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Load more -->
+      <div style="text-align:center;margin-top:48px" id="loadMoreWrap" class="reveal" style="display:none">
+        <button id="loadMoreBtn" onclick="loadMore()"
+          style="font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:14px 36px;border:1px solid var(--rule);background:transparent;color:var(--mid);cursor:pointer;transition:all .25s"
+          onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'"
+          onmouseout="this.style.borderColor='var(--rule)';this.style.color='var(--mid)'">
+          Load More
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section style="background:var(--cream);padding:80px 56px">
+    <div style="max-width:680px;margin:0 auto;text-align:center">
+      <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Stay Informed</div>
+      <div style="font-family:var(--fd);font-size:38px;font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:18px">Receive GMI Research<br />&amp; <em style="font-style:italic;color:var(--gold)">Market Insights</em></div>
+      <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:36px">Institutional-grade research delivered to qualified investors. Enter your details to receive our latest publications.</p>
+      <form onsubmit="return false" style="display:flex;gap:0;max-width:480px;margin:0 auto">
+        <input type="email" placeholder="your@institution.com"
+          style="flex:1;padding:14px 20px;border:1px solid var(--rule);border-right:none;background:#fff;font-family:var(--fb);font-size:14px;color:var(--ink);outline:none" />
+        <button
+          style="font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:14px 24px;background:var(--ink);color:var(--paper);border:none;cursor:pointer;white-space:nowrap;transition:background .2s"
+          onmouseover="this.style.background='var(--slate)'"
+          onmouseout="this.style.background='var(--ink)'">Subscribe</button>
+      </form>
+      <p style="font-size:11px;color:var(--mid);margin-top:14px;font-weight:300">For qualified institutional investors. We respect your privacy.</p>
+    </div>
+  </section>
+
+  <script>
+    // ── Reveal observer ──
+    const obs = new IntersectionObserver(e => {
+      e.forEach(x => { if (x.isIntersecting) { setTimeout(() => x.target.classList.add('visible'), 60); obs.unobserve(x.target) } })
+    }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ── News state ──
+    let allArticles = [];
+    let displayedCount = 0;
+    const PAGE_SIZE = 9;
+
+    // ── Tag inference from headline ──
+    const TAG_MAP = [
+      { words: ['africa','nigeria','kenya','ghana','ethiopia','nairobi','lagos','cairo','egypt','senegal','rwanda'], label: 'Emerging Markets · Africa' },
+      { words: ['private credit','direct lend','unitranche','mezzanine','warehouse','revolving'], label: 'Private Credit' },
+      { words: ['sovereign','eurobond','government bond','treasury','fed','central bank','rate','yield curve'], label: 'Sovereign Debt · Macro' },
+      { words: ['fintech','digital lend','neobank','embedded finance','crypto','blockchain','defi'], label: 'Fintech · Credit' },
+      { words: ['merger','acquisition','m&a','buyout','private equity','pe fund','sponsor'], label: 'M&A · Private Equity' },
+      { words: ['latin america','brazil','mexico','colombia','argentina','chile'], label: 'Emerging Markets · LatAm' },
+      { words: ['europe','ecb','eurozone','uk','britain','german','france'], label: 'Markets · Europe' },
+      { words: ['china','asia','japan','india','south korea','southeast asia'], label: 'Markets · Asia' },
+    ];
+    function inferTag(text) {
+      const lower = text.toLowerCase();
+      for (const t of TAG_MAP) {
+        if (t.words.some(w => lower.includes(w))) return t.label;
+      }
+      return 'Global Markets';
+    }
+
+    // ── Format date ──
+    function fmtDate(dateStr) {
+      if (!dateStr) return '';
+      try {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      } catch { return dateStr }
+    }
+
+    // ── Strip HTML tags from description ──
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html || '';
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    // ── Truncate ──
+    function trunc(str, n) {
+      return str && str.length > n ? str.slice(0, n).trimEnd() + '…' : str;
+    }
+
+    // ── Build a card element ──
+    function buildCard(item) {
+      const tag = inferTag((item.title || '') + ' ' + (item.description || ''));
+      const summary = trunc(stripHtml(item.description || item.summary || ''), 180);
+      const date = fmtDate(item.pubDate || item.isoDate || '');
+      const link = item.link || item.guid || '#';
+
+      const a = document.createElement('a');
+      a.className = 'icard reveal';
+      a.href = link;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML = `
+        <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">${tag}</div>
+        <div style="font-family:var(--fd);font-size:22px;font-weight:500;color:var(--ink);line-height:1.3;margin-bottom:14px">${trunc(item.title || 'Untitled', 90)}</div>
+        <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:28px">${summary || 'Click to read the full article on Yahoo Finance.'}</p>
+        <div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;color:var(--mid);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--rule);padding-top:18px">
+          <span>Yahoo Finance</span>
+          <span style="display:flex;align-items:center;gap:5px">${date}<span style="color:var(--gold);font-size:11px">↗</span></span>
+        </div>
+      `;
+      return a;
+    }
+
+    // ── Render next page of cards ──
+    function renderCards(start, count) {
+      const grid = document.getElementById('newsGrid');
+      const slice = allArticles.slice(start, start + count);
+      slice.forEach((item, i) => {
+        const card = buildCard(item);
+        grid.appendChild(card);
+        // trigger reveal
+        setTimeout(() => obs.observe(card), 50 * i);
+      });
+      displayedCount = start + slice.length;
+      const wrap = document.getElementById('loadMoreWrap');
+      if (displayedCount < allArticles.length) {
+        wrap.style.display = 'block';
+      } else {
+        wrap.style.display = 'none';
+      }
+    }
+
+    function loadMore() {
+      renderCards(displayedCount, PAGE_SIZE);
+    }
+
+    // ── Clear skeletons ──
+    function clearSkeletons() {
+      ['skel1','skel2','skel3'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      });
+    }
+
+    // ── Show error state ──
+    function showError(msg) {
+      clearSkeletons();
+      const grid = document.getElementById('newsGrid');
+      grid.innerHTML = `
+        <div style="grid-column:1/-1;padding:60px 40px;text-align:center;background:var(--cream)">
+          <div style="font-family:var(--fd);font-size:22px;font-weight:300;color:var(--mid);margin-bottom:8px">Unable to load live feed</div>
+          <p style="font-size:13px;font-weight:300;color:var(--mid)">${msg}</p>
+        </div>`;
+    }
+
+    // ── Main fetch ──
+    // Yahoo Finance RSS is fetched via a CORS-friendly RSS-to-JSON proxy (rss2json.com)
+    // Uses Yahoo Finance finance news RSS which is public
+    async function loadNews() {
+      // Reset
+      allArticles = [];
+      displayedCount = 0;
+      document.getElementById('loadMoreWrap').style.display = 'none';
+      document.getElementById('newsGrid').innerHTML = `
+        <div class="icard" id="skel1">
+          <div class="skel" style="width:60%;height:10px;margin-bottom:14px"></div>
+          <div class="skel" style="width:90%;height:18px;margin-bottom:8px"></div>
+          <div class="skel" style="width:75%;height:18px;margin-bottom:16px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:60%;height:11px;margin-bottom:28px"></div>
+          <div style="border-top:1px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between">
+            <div class="skel" style="width:35%;height:9px"></div><div class="skel" style="width:25%;height:9px"></div>
+          </div>
+        </div>
+        <div class="icard" id="skel2">
+          <div class="skel" style="width:55%;height:10px;margin-bottom:14px"></div>
+          <div class="skel" style="width:85%;height:18px;margin-bottom:8px"></div>
+          <div class="skel" style="width:70%;height:18px;margin-bottom:16px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:95%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:50%;height:11px;margin-bottom:28px"></div>
+          <div style="border-top:1px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between">
+            <div class="skel" style="width:35%;height:9px"></div><div class="skel" style="width:25%;height:9px"></div>
+          </div>
+        </div>
+        <div class="icard" id="skel3">
+          <div class="skel" style="width:65%;height:10px;margin-bottom:14px"></div>
+          <div class="skel" style="width:80%;height:18px;margin-bottom:8px"></div>
+          <div class="skel" style="width:90%;height:18px;margin-bottom:16px"></div>
+          <div class="skel" style="width:100%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:88%;height:11px;margin-bottom:6px"></div>
+          <div class="skel" style="width:55%;height:11px;margin-bottom:28px"></div>
+          <div style="border-top:1px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between">
+            <div class="skel" style="width:35%;height:9px"></div><div class="skel" style="width:25%;height:9px"></div>
+          </div>
+        </div>`;
+
+      const btn = document.getElementById('refreshBtn');
+      btn.classList.add('spinning');
+
+      // Yahoo Finance finance news RSS
+      const RSS_URL = encodeURIComponent('https://finance.yahoo.com/news/rssindex');
+      const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${RSS_URL}&count=30`;
+
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (data.status !== 'ok' || !Array.isArray(data.items) || data.items.length === 0) {
+          throw new Error('No articles returned');
+        }
+        allArticles = data.items;
+        clearSkeletons();
+        renderCards(0, PAGE_SIZE);
+      } catch (err) {
+        showError('The live feed could not be reached. Please try refreshing.');
+        console.error('News fetch error:', err);
+      } finally {
+        btn.classList.remove('spinning');
+      }
+    }
+
+    // Init
+    loadNews();
+  </script>
+</body>
+</html>
