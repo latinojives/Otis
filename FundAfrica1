@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --inst-navy: #0f172a;
+            --inst-gold: #c5a059;
+        }
+        .fund-africa-wrapper {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            min-height: 800px;
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05);
+            border-color: var(--inst-gold);
+        }
+        .btn-primary {
+            background-color: var(--inst-navy);
+            color: white;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #1e293b;
+            letter-spacing: 0.5px;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .filter-chip {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .active-filter {
+            background-color: var(--inst-navy) !important;
+            color: white !important;
+        }
+        /* Hide scrollbars */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="fund-africa-app" class="fund-africa-wrapper relative overflow-hidden">
+    
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2 cursor-pointer" onclick="app.setView('directory')">
+            <div class="w-8 h-8 bg-slate-900 flex items-center justify-center rounded">
+                <span class="text-white font-bold text-xs">FA</span>
+            </div>
+            <span class="font-bold tracking-tighter text-xl uppercase">Fund Africa</span>
+        </div>
+        <div class="flex items-center space-x-8 text-sm font-medium">
+            <button onclick="app.setView('directory')" class="hover:text-amber-700 transition">Marketplace</button>
+            <button onclick="app.setView('watchlist')" class="relative hover:text-amber-700 transition">
+                Watchlist
+                <span id="watchlist-count" class="ml-1 bg-amber-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">0</span>
+            </button>
+            <div class="h-4 w-px bg-slate-300"></div>
+            <span class="text-slate-400">Institutional Portal v1.04</span>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="max-w-7xl mx-auto px-6 py-10">
+        <!-- Dynamic Content Injected Here -->
+    </main>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full p-8 rounded-xl shadow-2xl relative">
+            <button onclick="app.closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="shield-check" class="text-amber-600 w-8 h-8"></i>
+                </div>
+                <h3 class="serif text-2xl mb-2">Connect to State Street</h3>
+                <p class="text-slate-500 mb-8">You are requesting institutional access to the secure data room for <span id="modal-project-name" class="font-semibold text-slate-800"></span>. A representative will contact your office within 2 hours.</p>
+                <div class="space-y-3">
+                    <button class="w-full btn-primary py-3 rounded font-semibold uppercase text-xs tracking-widest">Confirm Request</button>
+                    <button onclick="app.closeModal()" class="w-full py-3 text-slate-500 text-xs font-medium uppercase tracking-widest">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+/** 
+ * DATASET 
+ */
+const projects = [
+    { id: 1, title: "Kano Solar Array Phase II", country: "Nigeria", sector: "Energy", target: 45000000, yield: 12.4, minInv: 1000000, duration: "12 Years", desc: "Expansion of existing PV capacity to serve Northern Nigerian industrial hubs.", updates: [{date: "Oct 2024", t: "Phase I Grid Sync", d: "Successfully integrated 15MW to the national grid."}, {date: "Jan 2025", t: "Land Clearing", d: "Phase II environmental permits approved."}] },
+    { id: 2, title: "Nairobi Heights Commercial Hub", country: "Kenya", sector: "Real Estate", target: 28500000, yield: 9.8, minInv: 500000, duration: "8 Years", desc: "Grade A office space in the heart of Westlands, Nairobi.", updates: [{date: "Dec 2024", t: "Topping Out", d: "Structural completion of main tower reached."}] },
+    { id: 3, title: "Source of the Nile Eco-Resort", country: "Uganda", sector: "Tourism", target: 14200000, yield: 14.1, minInv: 250000, duration: "10 Years", desc: "Luxury sustainable tourism project focusing on high-net-worth international travelers.", updates: [{date: "Nov 2024", t: "Soft Launch", d: "Initial 10 villas operational with 90% occupancy."}] },
+    { id: 4, title: "Saldanha Bay Gas Turbine", country: "South Africa", sector: "Energy", target: 75000000, yield: 11.5, minInv: 5000000, duration: "15 Years", desc: "Critical energy infrastructure to stabilize the Western Cape grid.", updates: [{date: "Sep 2024", t: "Turbine Delivery", d: "Siemens units arrived at port."}] },
+    { id: 5, title: "Volta Basin Smart Irrigation", country: "Ghana", sector: "Agriculture", target: 8900000, yield: 16.2, minInv: 100000, duration: "5 Years", desc: "IOT-enabled water management for commercial cocoa and cereal production.", updates: [{date: "Jan 2025", t: "Harvest Cycle", d: "First automated harvest yielded 20% above projection."}] },
+    { id: 6, title: "Atlas Mountains Wind Farm", country: "Morocco", sector: "Energy", target: 62000000, yield: 10.1, minInv: 2000000, duration: "20 Years", desc: "Large-scale wind harvesting in the high-altitude corridors of Morocco.", updates: [{date: "Oct 2024", t: "PPA Agreement", d: "Signed 20-year purchase agreement with national utility."}] },
+    { id: 7, title: "Kigali Logistics Hub", country: "Rwanda", sector: "Logistics", target: 19500000, yield: 11.2, minInv: 500000, duration: "7 Years", desc: "Primary dry port facility connecting the East African Community trade route.", updates: [{date: "Feb 2025", t: "Warehouse B", d: "Cold storage facility fully commissioned."}] },
+    { id: 8, title: "New Cairo Residential Zone", country: "Egypt", sector: "Real Estate", target: 55000000, yield: 8.9, minInv: 1000000, duration: "10 Years", desc: "Premium mixed-use development targeting the burgeoning Egyptian middle class.", updates: [{date: "Aug 2024", t: "Sales Milestone", d: "70% of units pre-sold in Phase 1."}] },
+    { id: 9, title: "Abidjan Cocoa Processing Plant", country: "Côte d'Ivoire", sector: "Agriculture", target: 22000000, yield: 13.5, minInv: 500000, duration: "12 Years", desc: "Value-add facility moving from raw bean export to finished industrial cocoa butter.", updates: [{date: "Dec 2024", t: "Equipment Install", d: "Swiss processing lines arriving onsite."}] },
+    { id: 10, title: "Lekki Port Storage Expansion", country: "Nigeria", sector: "Logistics", target: 80000000, yield: 10.8, minInv: 5000000, duration: "15 Years", desc: "Strategic petroleum and dry bulk storage at the new Lekki Deep Sea Port.", updates: [{date: "Jan 2025", t: "Dredging", d: "Berth 4 dredging completed on schedule."}] },
+    { id: 11, title: "Great Rift Valley Geothermal", country: "Kenya", sector: "Energy", target: 95000000, yield: 11.9, minInv: 5000000, duration: "25 Years", desc: "Tapping volcanic steam for baseload renewable power.", updates: [{date: "Oct 2024", t: "Well Testing", d: "Test well #4 showing 15% higher pressure than modeled."}] },
+    { id: 12, title: "Zanzibar Beachfront Marina", country: "Tanzania", sector: "Tourism", target: 31000000, yield: 15.0, minInv: 750000, duration: "10 Years", desc: "Integrated resort and yacht club for the luxury Indian Ocean circuit.", updates: [{date: "Nov 2024", t: "Dredging", d: "Marina basin completed."}] },
+    { id: 13, title: "Eskom Grid Modernization", country: "South Africa", sector: "Infrastructure", target: 40000000, yield: 9.5, minInv: 2000000, duration: "12 Years", desc: "Upgrading substations to handle increased renewable inputs in Gauteng.", updates: [{date: "Jan 2025", t: "Procurement", d: "High-voltage transformer contracts awarded."}] },
+    { id: 14, title: "Dakar Data Center Facility", country: "Senegal", sector: "Technology", target: 17000000, yield: 13.0, minInv: 500000, duration: "10 Years", desc: "Tier III Data Center serving the West African sovereign cloud demand.", updates: [{date: "Oct 2024", t: "Fiber Link", d: "Primary undersea cable connection secured."}] },
+    { id: 15, title: "Bugesera Airport Retail", country: "Rwanda", sector: "Real Estate", target: 24500000, yield: 10.5, minInv: 250000, duration: "8 Years", desc: "Commercial duty-free and retail management at the new international hub.", updates: [{date: "Dec 2024", t: "Lease Agreements", d: "50% of floor space allocated to anchor brands."}] }
+];
+
+/**
+ * APP ENGINE
+ */
+const app = {
+    view: 'directory',
+    favorites: JSON.parse(localStorage.getItem('fa_watchlist')) || [],
+    filters: { search: '', country: 'All', sector: 'All' },
+
+    init() {
+        this.render();
+        this.updateWatchlistCount();
+    },
+
+    setView(v, id = null) {
+        this.view = v;
+        this.activeId = id;
+        window.scrollTo(0,0);
+        this.render();
+    },
+
+    toggleFavorite(id, e) {
+        if(e) e.stopPropagation();
+        if(this.favorites.includes(id)) {
+            this.favorites = this.favorites.filter(i => i !== id);
+        } else {
+            this.favorites.push(id);
+        }
+        localStorage.setItem('fa_watchlist', JSON.stringify(this.favorites));
+        this.updateWatchlistCount();
+        this.render();
+    },
+
+    updateWatchlistCount() {
+        document.getElementById('watchlist-count').innerText = this.favorites.length;
+    },
+
+    handleFilter(type, value) {
+        this.filters[type] = value;
+        this.render();
+    },
+
+    openModal(projectName) {
+        document.getElementById('modal-project-name').innerText = projectName;
+        document.getElementById('modal-overlay').classList.remove('hidden');
+        document.getElementById('modal-overlay').classList.add('flex');
+    },
+
+    closeModal() {
+        document.getElementById('modal-overlay').classList.add('hidden');
+        document.getElementById('modal-overlay').classList.remove('flex');
+    },
+
+    render() {
+        const container = document.getElementById('main-content');
+        
+        if(this.view === 'directory' || this.view === 'watchlist') {
+            const isWatchlist = this.view === 'watchlist';
+            let list = isWatchlist ? projects.filter(p => this.favorites.includes(p.id)) : projects;
+
+            // Apply filters
+            if(this.filters.search) {
+                list = list.filter(p => p.title.toLowerCase().includes(this.filters.search.toLowerCase()));
+            }
+            if(this.filters.country !== 'All') {
+                list = list.filter(p => p.country === this.filters.country);
+            }
+            if(this.filters.sector !== 'All') {
+                list = list.filter(p => p.sector === this.filters.sector);
+            }
+
+            container.innerHTML = `
+                <div class="fade-in">
+                    ${this.renderHero(isWatchlist)}
+                    ${this.renderFilters()}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                        ${list.map(p => this.renderCard(p)).join('')}
+                    </div>
+                    ${list.length === 0 ? '<div class="py-20 text-center text-slate-400">No assets found matching your criteria.</div>' : ''}
+                </div>
+            `;
+        } else if(this.view === 'detail') {
+            const p = projects.find(x => x.id === this.activeId);
+            container.innerHTML = this.renderDetailView(p);
+        }
+        lucide.createIcons();
+    },
+
+    renderHero(isWatchlist) {
+        const title = isWatchlist ? "Your Watchlist" : "Asset Directory";
+        const subtitle = isWatchlist ? "Tracking premium institutional allocations across the continent." : "Direct access to high-yield African infrastructure and development.";
+        return `
+            <div class="mb-12">
+                <h1 class="serif text-5xl md:text-7xl mb-4 text-slate-900">${title}</h1>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <p class="text-slate-500 max-w-xl text-lg">${subtitle}</p>
+                    <div class="flex space-x-12">
+                        <div>
+                            <div class="text-2xl font-bold text-slate-900">${projects.length}</div>
+                            <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Total Assets</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-slate-900">10+</div>
+                            <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Countries</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-slate-900">$540M+</div>
+                            <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">AUM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    renderFilters() {
+        const countries = ['All', ...new Set(projects.map(p => p.country))];
+        const sectors = ['All', ...new Set(projects.map(p => p.sector))];
+        
+        return `
+            <div class="flex flex-wrap items-center gap-4 border-y border-slate-200 py-6">
+                <div class="relative flex-grow max-w-xs">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-slate-400"></i>
+                    <input type="text" placeholder="Search by name..." 
+                        class="pl-10 pr-4 py-2 w-full bg-white border border-slate-200 rounded text-sm focus:outline-none focus:border-amber-500"
+                        oninput="app.handleFilter('search', this.value)" value="${this.filters.search}">
+                </div>
+                
+                <div class="flex items-center space-x-2 no-scrollbar overflow-x-auto whitespace-nowrap">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 mr-2">Country:</span>
+                    ${countries.map(c => `
+                        <button onclick="app.handleFilter('country', '${c}')" 
+                            class="filter-chip px-4 py-1.5 rounded-full text-xs font-medium border border-slate-200 bg-white ${this.filters.country === c ? 'active-filter' : ''}">
+                            ${c}
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div class="flex items-center space-x-2 no-scrollbar overflow-x-auto whitespace-nowrap">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 mr-2">Sector:</span>
+                    ${sectors.map(s => `
+                        <button onclick="app.handleFilter('sector', '${s}')" 
+                            class="filter-chip px-4 py-1.5 rounded-full text-xs font-medium border border-slate-200 bg-white ${this.filters.sector === s ? 'active-filter' : ''}">
+                            ${s}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    renderCard(p) {
+        const isFav = this.favorites.includes(p.id);
+        return `
+            <div onclick="app.setView('detail', ${p.id})" class="glass-card p-6 rounded-lg cursor-pointer flex flex-col h-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest font-bold text-amber-600 block mb-1">${p.country}</span>
+                        <h3 class="serif text-xl leading-tight h-14 overflow-hidden">${p.title}</h3>
+                    </div>
+                    <button onclick="app.toggleFavorite(${p.id}, event)" class="p-2 hover:bg-slate-50 rounded-full transition">
+                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500 text-red-500' : 'text-slate-300'}"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6 py-4 border-y border-slate-100">
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Target</div>
+                        <div class="font-bold text-slate-800">$${(p.target / 1000000).toFixed(1)}M</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Proj. Yield</div>
+                        <div class="font-bold text-emerald-600">${p.yield}%</div>
+                    </div>
+                </div>
+
+                <div class="mt-auto flex justify-between items-center">
+                    <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">${p.sector}</span>
+                    <span class="text-xs font-medium text-slate-400 flex items-center">
+                        View Details <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        `;
+    },
+
+    renderDetailView(p) {
+        const isFav = this.favorites.includes(p.id);
+        return `
+            <div class="fade-in">
+                <button onclick="app.setView('directory')" class="mb-8 flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition">
+                    <i data-lucide="chevron-left" class="w-4 h-4 mr-1"></i> Back to Assets
+                </button>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <div class="lg:col-span-2">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <span class="text-amber-600 font-bold tracking-widest text-xs uppercase">${p.country} — ${p.sector}</span>
+                                <h1 class="serif text-4xl md:text-5xl mt-2">${p.title}</h1>
+                            </div>
+                            <button onclick="app.toggleFavorite(${p.id})" class="flex items-center space-x-2 border border-slate-200 px-4 py-2 rounded hover:bg-slate-50 transition">
+                                <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-red-500 text-red-500' : ''}"></i>
+                                <span class="text-xs font-bold uppercase tracking-tighter">${isFav ? 'Watchlisted' : 'Add to Watchlist'}</span>
+                            </button>
+                        </div>
+
+                        <div class="aspect-video bg-slate-200 rounded-xl mb-10 overflow-hidden relative group">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+                        </div>
+
+                        <div class="prose max-w-none mb-12">
+                            <h3 class="serif text-2xl mb-4">Investment Thesis</h3>
+                            <p class="text-slate-600 leading-relaxed text-lg">${p.desc} This project offers a unique exposure to emerging markets with managed risk profiles through sovereign guarantees and multi-lateral backing.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="serif text-2xl mb-8">Project Timeline</h3>
+                            <div class="relative pl-8 timeline-line space-y-10">
+                                ${p.updates.map(u => `
+                                    <div class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white border-2 border-amber-500 z-10"></div>
+                                        <div class="text-[10px] font-bold uppercase text-amber-600 mb-1">${u.date}</div>
+                                        <h4 class="font-bold text-slate-900 mb-2">${u.t}</h4>
+                                        <p class="text-slate-500 text-sm">${u.d}</p>
+                                    </div>
+                                `).join('')}
+                                <div class="relative">
+                                    <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-200 z-10"></div>
+                                    <div class="text-[10px] font-bold uppercase text-slate-400 mb-1">Upcoming</div>
+                                    <h4 class="font-bold text-slate-400 mb-2">Q3 Disbursement Cycle</h4>
+                                    <p class="text-slate-400 text-sm italic">Pending further capital allocation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white border border-slate-200 p-8 rounded-xl shadow-sm">
+                            <h4 class="text-[10px] uppercase font-bold text-slate-400 mb-6 tracking-widest">Key Metrics</h4>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="text-slate-500 text-xs mb-1">Target Raise</div>
+                                    <div class="text-3xl font-bold">$${(p.target / 1000000).toFixed(1)}M</div>
+                                </div>
+                                <div>
+                                    <div class="text-slate-500 text-xs mb-1">Internal Rate of Return (Est.)</div>
+                                    <div class="text-3xl font-bold text-emerald-600">${p.yield}%</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 border-t border-slate-100 pt-6">
+                                    <div>
+                                        <div class="text-slate-500 text-[10px] font-bold uppercase">Min. Commit</div>
+                                        <div class="text-sm font-bold">$${p.minInv.toLocaleString()}</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-slate-500 text-[10px] font-bold uppercase">Term</div>
+                                        <div class="text-sm font-bold">${p.duration}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="app.openModal('${p.title}')" class="w-full btn-primary mt-8 py-4 rounded font-bold uppercase text-xs tracking-widest flex items-center justify-center">
+                                Connect to State Street <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-slate-900 text-white p-8 rounded-xl">
+                            <i data-lucide="info" class="text-amber-400 mb-4"></i>
+                            <h4 class="font-bold mb-2">Institutional Note</h4>
+                            <p class="text-slate-400 text-xs leading-relaxed">This asset is available only to Qualified Institutional Buyers (QIB). Due diligence materials are available upon signed NDA via our State Street custodial bridge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+};
+
+// Start the Application
+document.addEventListener('DOMContentLoaded', () => app.init());
+</script>
+
+</body>
+</html>
