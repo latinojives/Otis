@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GMI Fund Africa — Series Program Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0d12;
+      --paper: #f5f3ee;
+      --cream: #ede9e0;
+      --gold: #c88638;
+      --goldlt: #e3a65b;
+      --slate: #1e2535;
+      --mid: #6b7280;
+      --rule: rgba(10, 13, 18, .1);
+      --ruleg: rgba(184, 150, 96, .3);
+      --fd: 'Cormorant Garamond', Georgia, serif;
+      --fb: 'DM Sans', sans-serif;
+      --fm: 'DM Mono', monospace;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--fb);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 56px;
+      height: 72px;
+      background: rgba(245, 243, 238, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-logo .logotype {
+      font-family: var(--fd);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    .nav-logo .logsub {
+      font-family: var(--fm);
+      font-size: 8.5px;
+      letter-spacing: .22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: .65;
+      transition: opacity .2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .nav-cta {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--ink);
+      padding: 10px 24px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--slate);
+    }
+
+    /* HERO */
+    .wb-hero {
+      background-color: #0d1b2a; /* Deep dark blue for World Bank feel */
+      color: #ffffff;
+      padding: 180px 24px 100px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .wb-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gold);
+    }
+
+    .wb-pill {
+      display: inline-block;
+      font-family: var(--fm);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #0d1b2a;
+      background-color: var(--gold);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .wb-title {
+      font-family: var(--fd);
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .wb-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .wb-desc {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 750px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.8);
+      font-family: var(--fd);
+    }
+
+    /* FILTER BAR */
+    .filter-section {
+      padding: 40px 56px 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filter-btn {
+      font-family: var(--fm);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--mid);
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    /* SCORECARD GRID SECTION */
+    .scorecard-section {
+      padding: 40px 56px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 32px;
+    }
+
+    /* TARGET CARD */
+    .target-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 36px 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .target-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .target-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    }
+    
+    .target-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--cream);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--gold);
+    }
+
+    .card-category {
+      font-family: var(--fm);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .card-series-tag {
+      font-family: var(--fm);
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 500;
+      margin-left: auto;
+      letter-spacing: 0.05em;
+    }
+
+    .card-title {
+      font-family: var(--fd);
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 24px;
+      min-height: 62px;
+    }
+
+    .card-title a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s ease;
+    }
+
+    .card-title a:hover {
+      color: var(--gold);
+    }
+
+    /* KEY METRICS GRID */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      background: var(--paper);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      border: 1px solid var(--rule);
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(10, 13, 18, 0.05);
+      padding-bottom: 8px;
+    }
+
+    .metric-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .metric-label {
+      font-family: var(--fm);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+
+    .metric-value {
+      font-family: var(--fb);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* PROGRESS TRACKER */
+    .progress-section {
+      margin-top: auto;
+      border-top: 1px solid var(--rule);
+      padding-top: 20px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 8px;
+    }
+
+    .progress-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .progress-percentage {
+      font-family: var(--fm);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .progress-bar-bg {
+      height: 6px;
+      background-color: var(--cream);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: var(--gold);
+      border-radius: 3px;
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--fm);
+      font-size: 9px;
+      color: var(--mid);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .view-details-link {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .view-details-link:hover {
+      color: var(--goldlt);
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--ink);
+      color: var(--paper);
+      padding: 60px 56px;
+      text-align: center;
+      font-size: 13px;
+      border-top: 4px solid var(--gold);
+    }
+
+    footer .footer-logo {
+      font-family: var(--fd);
+      font-size: 24px;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    footer .footer-sub {
+      font-family: var(--fm);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    footer .footer-meta {
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .scorecard-section {
+        padding: 40px 24px;
+      }
+      .filter-section {
+        padding: 40px 24px 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        padding: 0 24px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .wb-hero {
+        padding-top: 140px;
+        padding-bottom: 80px;
+      }
+    }
+    
+    /* ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <span class="logotype">GMI.</span>
+      <span class="logsub">Fund Africa</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#series-program">Series Program</a></li>
+      <li><a href="mailto:ir@gmiassets.com">Investor Relations</a></li>
+    </ul>
+    <a href="mailto:ir@gmiassets.com" class="nav-cta">Inquire Now</a>
+  </nav>
+
+ <header class="wb-hero">
+    <div class="wb-pill reveal">Flagship Program Overview</div>
+    <h1 class="wb-title reveal">Institutional Capital Gateway for <em>Fund Africa</em></h1>
+    <p class="wb-desc reveal">Africa’s institutional platform for private and public regulated assets — engineered as the continent’s new frontier for capital markets and liquidity.</p>
+</header>
+
+<section class="filter-section reveal">
+    <button class="filter-btn active" onclick="filterCards('all')">All Series</button>
+    <button class="filter-btn" onclick="filterCards('private')">Private Credit / Debt</button>
+    <button class="filter-btn" onclick="filterCards('public')">Public Markets &amp; Bonds</button>
+    <button class="filter-btn" onclick="filterCards('real-assets')">Real Assets &amp; Mixed-Use</button>
+</section>
+
+  <section class="scorecard-section" id="series-program">
+    <div class="grid-container">
+
+      <!-- SERIES I -->
+      <div class="target-card reveal" data-category="private" style="transition-delay: 0.1s;">
+        <div class="card-header">
+          <div class="card-icon">🏢</div>
+          <div class="card-category">Flagship Platform</div>
+          <div class="card-series-tag">SERIES I</div>
+        </div>
+        <h3 class="card-title"><a href="series-1.html">GMI Fund Africa</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$4.5B</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">12–18%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Multi-Sector</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">74%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 74%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-1.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES II -->
+      <div class="target-card reveal" data-category="public" style="transition-delay: 0.15s;">
+        <div class="card-header">
+          <div class="card-icon">📈</div>
+          <div class="card-category">Public Markets Sleeve</div>
+          <div class="card-series-tag">SERIES II</div>
+        </div>
+        <h3 class="card-title"><a href="series-2.html">LSF Invesco ETF Public</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$500M</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">Index Curve (Benchmark)</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Public Regulated</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">42%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 42%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-2.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2027</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES III -->
+      <div class="target-card reveal" data-category="private" style="transition-delay: 0.2s;">
+        <div class="card-header">
+          <div class="card-icon">🤝</div>
+          <div class="card-category">Trade & Supply Chain</div>
+          <div class="card-series-tag">SERIES III</div>
+        </div>
+        <h3 class="card-title"><a href="series-3.html">GMI-FA-Afrexim</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$1.2B</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">10–14%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Trade Credit</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">89%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 89%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-3.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2028</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES IV -->
+      <div class="target-card reveal" data-category="private" style="transition-delay: 0.25s;">
+        <div class="card-header">
+          <div class="card-icon">💳</div>
+          <div class="card-category">Fintech Credit</div>
+          <div class="card-series-tag">SERIES IV</div>
+        </div>
+        <h3 class="card-title"><a href="series-4.html">GMI Fintech Credit Fund</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$450M</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">12–14%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Fintech Credit</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">61%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 61%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-4.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2029</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES V -->
+      <div class="target-card reveal" data-category="public" style="transition-delay: 0.3s;">
+        <div class="card-header">
+          <div class="card-icon">💵</div>
+          <div class="card-category">Fixed Income & Real Assets</div>
+          <div class="card-series-tag">SERIES V</div>
+        </div>
+        <h3 class="card-title"><a href="series-5.html">Africa Bond Fund</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$600M</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">11–15%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Fixed Income</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">95%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 95%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-5.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note: SERIES VI is intentionally missing as per source specification -->
+
+      <!-- SERIES VII -->
+      <div class="target-card reveal" data-category="private" style="transition-delay: 0.35s;">
+        <div class="card-header">
+          <div class="card-icon">🏦</div>
+          <div class="card-category">Pan-African Banking</div>
+          <div class="card-series-tag">SERIES VII</div>
+        </div>
+        <h3 class="card-title"><a href="series-7.html">GMI-FA-EB</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$200M</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">10–14%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Bank Credit</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">57%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 57%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-7.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2028</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES VIII -->
+      <div class="target-card reveal" data-category="real-assets" style="transition-delay: 0.4s;">
+        <div class="card-header">
+          <div class="card-icon">🚢</div>
+          <div class="card-category">Marine Asset-Backed</div>
+          <div class="card-series-tag">SERIES VIII</div>
+        </div>
+        <h3 class="card-title"><a href="series-8.html">GMI-FA-M-Ves</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">Facility Amount</span>
+            <span class="metric-value">$185M</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Coupon Rate</span>
+            <span class="metric-value">10.0%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Marine ABL</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">33%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 33%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-8.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2027</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES IX -->
+      <div class="target-card reveal" data-category="real-assets" style="transition-delay: 0.45s;">
+        <div class="card-header">
+          <div class="card-icon">🏗️</div>
+          <div class="card-category">African International Center</div>
+          <div class="card-series-tag">SERIES IX</div>
+        </div>
+        <h3 class="card-title"><a href="series-9.html">GMI-FA-AIC</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$930M</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">N/A (US REIT)</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Mixed-Use</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">98%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 98%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-9.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2029</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES X -->
+      <div class="target-card reveal" data-category="private" style="transition-delay: 0.5s;">
+        <div class="card-header">
+          <div class="card-icon">🔄</div>
+          <div class="card-category">Secondary Liquidity</div>
+          <div class="card-series-tag">SERIES X</div>
+        </div>
+        <h3 class="card-title"><a href="series-10.html">GMI Liquidity Fund X</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$1.6B</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Net IRR Target</span>
+            <span class="metric-value">N/A (GP-Led)</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Secondary Liquidity</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">19%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 19%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-10.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERIES XI -->
+      <div class="target-card reveal" data-category="real-assets" style="transition-delay: 0.55s;">
+        <div class="card-header">
+          <div class="card-icon">🏭</div>
+          <div class="card-category">Petrochemical & Refinery</div>
+          <div class="card-series-tag">SERIES XI</div>
+        </div>
+        <h3 class="card-title"><a href="series-11.html">GMI-FA-Dangote</a></h3>
+        
+        <div class="metrics-grid">
+          <div class="metric-row">
+            <span class="metric-label">AUM Target</span>
+            <span class="metric-value">$1.0B</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row" style="width:100%; display:flex; justify-content:space-between;">
+              <span class="metric-label">Net IRR Target</span>
+              <span class="metric-value">12–15%</span>
+            </span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Mandate</span>
+            <span class="metric-value">Industrial Credit</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Funding Progress</span>
+            <span class="progress-percentage">82%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 82%;"></div>
+          </div>
+          <div class="card-footer">
+            <a href="series-11.html" class="view-details-link">View Mandate Details &rarr;</a>
+            <span>2028</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">GMI.</div>
+    <div class="footer-sub">Fund Africa</div>
+    <div class="footer-meta">
+      &copy; 2026 GMI Capital Partners. All rights reserved.<br>
+      CONFIDENTIAL &mdash; FOR INSTITUTIONAL INVESTORS ONLY &mdash; GMIASSETS.COM
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Animation Logic
+    const observerOptions = {
+      threshold: 0.05,
+      rootMargin: "0px 0px -30px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Animate progress bars
+          if (entry.target.classList.contains('target-card')) {
+            const fill = entry.target.querySelector('.progress-bar-fill');
+            if (fill && fill.style.width) {
+              const targetWidth = fill.style.width;
+              fill.style.width = '0';
+              setTimeout(() => {
+                fill.style.width = targetWidth;
+              }, 100);
+            }
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    function initReveal() {
+      document.querySelectorAll('.reveal').forEach(element => {
+        observer.observe(element);
+      });
+    }
+
+    initReveal();
+
+    // Filtering logic
+    function filterCards(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.target-card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+          card.classList.add('visible');
+          
+          // Trigger progress bar animation again on filter
+          const fill = card.querySelector('.progress-bar-fill');
+          if (fill && fill.style.width) {
+            const targetWidth = fill.style.width;
+            fill.style.width = '0';
+            setTimeout(() => {
+              fill.style.width = targetWidth;
+            }, 50);
+          }
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
